@@ -1,0 +1,166 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>skbeam.core.calibration.refine_center &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="cdi" href="../cdi.html" />
+    <link rel="prev" title="skbeam.core.calibration.estimate_d_blind" href="skbeam.core.calibration.estimate_d_blind.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="skbeam-core-calibration-refine-center">
+<h1>skbeam.core.calibration.refine_center<a class="headerlink" href="#skbeam-core-calibration-refine-center" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="skbeam.core.calibration.refine_center">
+<code class="descclassname">skbeam.core.calibration.</code><code class="descname">refine_center</code><span class="sig-paren">(</span><em>image</em>, <em>calibrated_center</em>, <em>pixel_size</em>, <em>phi_steps</em>, <em>max_peaks</em>, <em>thresh</em>, <em>window_size</em>, <em>nx=None</em>, <em>min_x=None</em>, <em>max_x=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.calibration.refine_center" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refines the location of the center of the beam.</p>
+<p>This relies on being able to see the whole powder pattern.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>image</strong> : ndarray</p>
+<blockquote>
+<div><p>The image</p>
+</div></blockquote>
+<p><strong>calibrated_center</strong> : tuple</p>
+<blockquote>
+<div><p>(row, column) the estimated center</p>
+</div></blockquote>
+<p><strong>pixel_size</strong> : tuple</p>
+<blockquote>
+<div><p>(pixel_height, pixel_width)</p>
+</div></blockquote>
+<p><strong>phi_steps</strong> : int</p>
+<blockquote>
+<div><p>How many regions to split the ring into, should be &gt;10</p>
+</div></blockquote>
+<p><strong>max_peaks</strong> : int</p>
+<blockquote>
+<div><p>Number of rings to look it</p>
+</div></blockquote>
+<p><strong>thresh</strong> : float</p>
+<blockquote>
+<div><p>Fraction of maximum peak height</p>
+</div></blockquote>
+<p><strong>window_size</strong> : int, optional</p>
+<blockquote>
+<div><p>The window size to use (in bins) to use when refining peaks</p>
+</div></blockquote>
+<p><strong>nx</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of bins to use for radial binning</p>
+</div></blockquote>
+<p><strong>min_x</strong> : float, optional</p>
+<blockquote>
+<div><p>The minimum radius to use for radial binning</p>
+</div></blockquote>
+<p><strong>max_x</strong> : float, optional</p>
+<blockquote>
+<div><p>The maximum radius to use for radial binning</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>calibrated_center</strong> : tuple</p>
+<blockquote class="last">
+<div><p>The refined calibrated center.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Complete Reference (API)</a><ul>
+  <li><a href="../index.html">Core API</a><ul>
+  <li><a href="../calibration.html"><code class="docutils literal"><span class="pre">calibration</span></code></a><ul>
+      <li>Previous: <a href="skbeam.core.calibration.estimate_d_blind.html" title="previous chapter">skbeam.core.calibration.estimate_d_blind</a></li>
+      <li>Next: <a href="../cdi.html" title="next chapter"><code class="docutils literal"><span class="pre">cdi</span></code></a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.calibration.refine_center.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.calibration.refine_center.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

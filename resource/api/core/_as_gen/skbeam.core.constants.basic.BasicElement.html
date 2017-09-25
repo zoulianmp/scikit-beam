@@ -1,0 +1,205 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>skbeam.core.constants.basic.BasicElement &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="skbeam.core.constants.xrf.XrayLibWrap" href="skbeam.core.constants.xrf.XrayLibWrap.html" />
+    <link rel="prev" title="constants" href="../constants.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="skbeam-core-constants-basic-basicelement">
+<h1>skbeam.core.constants.basic.BasicElement<a class="headerlink" href="#skbeam-core-constants-basic-basicelement" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="skbeam.core.constants.basic.BasicElement">
+<em class="property">class </em><code class="descclassname">skbeam.core.constants.basic.</code><code class="descname">BasicElement</code><span class="sig-paren">(</span><em>Z</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.constants.basic.BasicElement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Object to return basic elemental information</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>element</strong> : str or int</p>
+<blockquote class="last">
+<div><p>Element symbol, name or atomic number (‘Zinc’, ‘Zn’ or 30)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Create an `Element` object</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">Element</span><span class="p">(</span><span class="s1">&#39;Zn&#39;</span><span class="p">)</span> <span class="c1"># or e = Element(30)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># get the atomic mass</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">mass</span>
+<span class="go">65.37</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># get the density in grams / cm^3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">density</span>
+<span class="go">7.14</span>
+</pre></div>
+</div>
+<p class="rubric">Attributes</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="40%" />
+<col width="60%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Z</strong></td>
+<td>(int) Atomic number</td>
+</tr>
+<tr class="row-even"><td><strong>sym</strong></td>
+<td>(str) Element symbol (Fe, Cr, etc.)</td>
+</tr>
+<tr class="row-odd"><td><strong>name</strong></td>
+<td>(str) Full element name (Iron, Chromium, etc.</td>
+</tr>
+<tr class="row-even"><td><strong>atomic_radius</strong></td>
+<td>(float) AtomicRadius[A]</td>
+</tr>
+<tr class="row-odd"><td><strong>covalent_radius</strong></td>
+<td>(float) CovalentRadius[A]</td>
+</tr>
+<tr class="row-even"><td><strong>mass</strong></td>
+<td>(float) AtomicMass</td>
+</tr>
+<tr class="row-odd"><td><strong>bp</strong></td>
+<td>(float) BoilingPoint[K]</td>
+</tr>
+<tr class="row-even"><td><strong>mp</strong></td>
+<td>(float) MeltingPoint[K]</td>
+</tr>
+<tr class="row-odd"><td><strong>density</strong></td>
+<td>(float) Density[g/ccm]</td>
+</tr>
+<tr class="row-even"><td><strong>atomic_volume</strong></td>
+<td>(float) AtomicVolume</td>
+</tr>
+<tr class="row-odd"><td><strong>coherent_scattering_length</strong></td>
+<td>(float) CoherentScatteringLength[1E-12cm]</td>
+</tr>
+<tr class="row-even"><td><strong>incoherent_crosssection</strong></td>
+<td>(float) IncoherentX-section[barn]</td>
+</tr>
+<tr class="row-odd"><td><strong>absorption</strong></td>
+<td>(float) Absorption&#64;1.8A[barn]</td>
+</tr>
+<tr class="row-even"><td><strong>debye_temp</strong></td>
+<td>(float) DebyeTemperature[K]</td>
+</tr>
+<tr class="row-odd"><td><strong>thermal_conductivity</strong></td>
+<td>(float) ThermalConductivity[W/cmK]</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="skbeam.core.constants.basic.BasicElement.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>Z</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.constants.basic.BasicElement.__init__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#skbeam.core.constants.basic.BasicElement.__init__" title="skbeam.core.constants.basic.BasicElement.__init__"><code class="xref py py-obj docutils literal"><span class="pre">__init__</span></code></a>(Z,&nbsp;*args,&nbsp;**kwargs)</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Complete Reference (API)</a><ul>
+  <li><a href="../index.html">Core API</a><ul>
+  <li><a href="../constants.html"><code class="docutils literal"><span class="pre">constants</span></code></a><ul>
+      <li>Previous: <a href="../constants.html" title="previous chapter"><code class="docutils literal"><span class="pre">constants</span></code></a></li>
+      <li>Next: <a href="skbeam.core.constants.xrf.XrayLibWrap.html" title="next chapter">skbeam.core.constants.xrf.XrayLibWrap</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.constants.basic.BasicElement.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.constants.basic.BasicElement.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

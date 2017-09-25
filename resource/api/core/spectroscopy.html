@@ -1,0 +1,282 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.spectroscopy Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="X-ray speckle visibility spectroscopy(XSVS)" href="speckle.html" />
+    <link rel="prev" title="core.roi Module" href="roi.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.core.spectroscopy">
+<span id="core-spectroscopy-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">core.spectroscopy</span></code> Module<a class="headerlink" href="#module-skbeam.core.spectroscopy" title="Permalink to this headline">¶</a></h1>
+<p>This module is for spectroscopy specific tools (spectrum fitting etc).</p>
+<dl class="function">
+<dt id="skbeam.core.spectroscopy.align_and_scale">
+<code class="descclassname">skbeam.core.spectroscopy.</code><code class="descname">align_and_scale</code><span class="sig-paren">(</span><em>energy_list</em>, <em>counts_list</em>, <em>pk_find_fun=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.spectroscopy.align_and_scale" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>energy_list</strong> : iterable of ndarrays</p>
+<blockquote>
+<div><p>list of ndarrays with the energy of each element</p>
+</div></blockquote>
+<p><strong>counts_list</strong> : iterable of ndarrays</p>
+<blockquote>
+<div><p>list of ndarrays of counts/element</p>
+</div></blockquote>
+<p><strong>pk_find_fun</strong> : function or None</p>
+<blockquote>
+<div><p>A function which takes two ndarrays and returns parameters
+about the largest peak.  If None, defaults to <cite>find_largest_peak</cite>.
+For this demo, the output is (center, height, width), but this sould
+be pinned down better.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>out_e</strong> : list of ndarray</p>
+<blockquote>
+<div><p>The aligned/scaled energy arrays</p>
+</div></blockquote>
+<p><strong>out_c</strong> : list of ndarray</p>
+<blockquote class="last">
+<div><p>The count arrays (should be the same as the input)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.spectroscopy.find_largest_peak">
+<code class="descclassname">skbeam.core.spectroscopy.</code><code class="descname">find_largest_peak</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>window=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.spectroscopy.find_largest_peak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds and estimates the location, width, and height of
+the largest peak. Assumes the top of the peak can be
+approximated as a Gaussian.  Finds the peak properties
+using least-squares fitting of a parabola to the log of
+the counts.</p>
+<p>The region around the peak can be approximated by
+<span class="math">\(Y = Y0 * exp(- (X - X0)**2 / (2 * sigma **2))\)</span></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : ndarray</p>
+<blockquote>
+<div><p>The independent variable</p>
+</div></blockquote>
+<p><strong>y</strong> : ndarary</p>
+<blockquote>
+<div><p>Dependent variable sampled at positions X</p>
+</div></blockquote>
+<p><strong>window</strong> : int, optional</p>
+<blockquote>
+<div><p>The size of the window around the maximum to use
+for the fitting</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>x0</strong> : float</p>
+<blockquote>
+<div><p>The location of the peak</p>
+</div></blockquote>
+<p><strong>y0</strong> : float</p>
+<blockquote>
+<div><p>The magnitude of the peak</p>
+</div></blockquote>
+<p><strong>sigma</strong> : float</p>
+<blockquote class="last">
+<div><p>Width of the peak</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.spectroscopy.integrate_ROI">
+<code class="descclassname">skbeam.core.spectroscopy.</code><code class="descname">integrate_ROI</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>x_min</em>, <em>x_max</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.spectroscopy.integrate_ROI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integrate region(s) of input data.</p>
+<p>If <cite>x_min</cite> and <cite>x_max</cite> are arrays/lists they must be equal in
+length. The values contained in the ‘x’ must be monotonic (up or
+down).  The returned value is the sum of all the regions and a
+single scalar value is returned.  Each region is computed
+independently, if regions overlap the overlapped area will be
+included multiple times in the final sum.</p>
+<p>This function assumes that <cite>y</cite> is a function of
+<cite>x</cite> sampled at <cite>x</cite>.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>Independent variable, any unit</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>Dependent variable, any units</p>
+</div></blockquote>
+<p><strong>x_min</strong> : float or array</p>
+<blockquote>
+<div><p>The lower edge of the integration region(s)
+in units of x.</p>
+</div></blockquote>
+<p><strong>x_max</strong> : float or array</p>
+<blockquote>
+<div><p>The upper edge of the integration region(s)
+in units of x.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">float</p>
+<blockquote class="last">
+<div><p>The totals integrated value in same units as <cite>y</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.spectroscopy.integrate_ROI_spectrum">
+<code class="descclassname">skbeam.core.spectroscopy.</code><code class="descname">integrate_ROI_spectrum</code><span class="sig-paren">(</span><em>bin_edges</em>, <em>counts</em>, <em>x_min</em>, <em>x_max</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.spectroscopy.integrate_ROI_spectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Integrate region(s) of histogram.</p>
+<p>If <cite>x_min</cite> and <cite>x_max</cite> are arrays/lists they must be equal in
+length. The values contained in the ‘x_value_array’ must be
+monotonic (up or down).  The returned value is the sum of all the
+regions and a single scalar value is returned.  Each region is
+computed independently, if regions overlap the overlapped area will
+be included multiple times in the final sum.</p>
+<p><cite>bin_edges</cite> is an array of the left edges and the final right
+edges of the bins.  <cite>counts</cite> is the value in each of those bins.</p>
+<p>The bins who’s centers fall with in the integration limits are
+included in the sum.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>bin_edges</strong> : array</p>
+<blockquote>
+<div><p>Independent variable, any unit.</p>
+<p>Must be one longer in length than counts</p>
+</div></blockquote>
+<p><strong>counts</strong> : array</p>
+<blockquote>
+<div><p>Dependent variable, any units</p>
+</div></blockquote>
+<p><strong>x_min</strong> : float or array</p>
+<blockquote>
+<div><p>The lower edge of the integration region(s).</p>
+</div></blockquote>
+<p><strong>x_max</strong> : float or array</p>
+<blockquote>
+<div><p>The upper edge of the integration region(s).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">float</p>
+<blockquote class="last">
+<div><p>The totals integrated value in same units as <cite>counts</cite></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+  <li><a href="index.html">Core API</a><ul>
+      <li>Previous: <a href="roi.html" title="previous chapter"><code class="docutils literal"><span class="pre">core.roi</span></code> Module</a></li>
+      <li>Next: <a href="speckle.html" title="next chapter">X-ray speckle visibility spectroscopy(XSVS)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/core/spectroscopy.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/core/spectroscopy.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

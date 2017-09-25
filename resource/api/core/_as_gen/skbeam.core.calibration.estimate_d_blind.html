@@ -1,0 +1,174 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>skbeam.core.calibration.estimate_d_blind &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="skbeam.core.calibration.refine_center" href="skbeam.core.calibration.refine_center.html" />
+    <link rel="prev" title="calibration" href="../calibration.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="skbeam-core-calibration-estimate-d-blind">
+<h1>skbeam.core.calibration.estimate_d_blind<a class="headerlink" href="#skbeam-core-calibration-estimate-d-blind" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="skbeam.core.calibration.estimate_d_blind">
+<code class="descclassname">skbeam.core.calibration.</code><code class="descname">estimate_d_blind</code><span class="sig-paren">(</span><em>name</em>, <em>wavelength</em>, <em>bin_centers</em>, <em>ring_average</em>, <em>window_size</em>, <em>max_peak_count</em>, <em>thresh</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.calibration.estimate_d_blind" title="Permalink to this definition">¶</a></dt>
+<dd><p>Estimate the sample-detector distance</p>
+<p>Given a radially integrated calibration image return an estimate for
+the sample-detector distance.  This function does not require a
+rough estimate of what d should be.</p>
+<p>For the peaks found the detector-sample distance is estimated via</p>
+<div class="math">
+\[D = \frac{r}{\tan 2\theta}\]</div>
+<p>where <span class="math">\(r\)</span> is the distance in mm from the calibrated center
+to the ring on the detector and <span class="math">\(D\)</span> is the distance from
+the sample to the detector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>name</strong> : str</p>
+<blockquote>
+<div><p>The name of the calibration standard.  Used to look up the
+expected peak location</p>
+<p>Valid options: [‘Al2O3’, ‘CeO2’, ‘LaB6’, ‘Ni’, ‘Si’]</p>
+</div></blockquote>
+<p><strong>wavelength</strong> : float</p>
+<blockquote>
+<div><p>The wavelength of scattered x-ray in nm</p>
+</div></blockquote>
+<p><strong>bin_centers</strong> : array</p>
+<blockquote>
+<div><p>The distance from the calibrated center to the center of
+the ring’s annulus in mm</p>
+</div></blockquote>
+<p><strong>ring_average</strong> : array</p>
+<blockquote>
+<div><p>The average intensity in the given ring of a azimuthally integrated
+powder pattern.  In counts [arb]</p>
+</div></blockquote>
+<p><strong>window_size</strong> : int</p>
+<blockquote>
+<div><p>The number of elements on either side of a local maximum to
+use for locating and refining peaks.  Candidates are identified
+as a relative maximum in a window sized (2*window_size + 1) and
+the same window is used for fitting the peaks to refine the location.</p>
+</div></blockquote>
+<p><strong>max_peak_count</strong> : int</p>
+<blockquote>
+<div><p>Use at most this many peaks</p>
+</div></blockquote>
+<p><strong>thresh</strong> : float</p>
+<blockquote>
+<div><p>Fraction of maximum peak height</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>dist_sample</strong> : float</p>
+<blockquote>
+<div><p>The detector-sample distance in mm.  This is the mean of the estimate
+from all of the peaks used.</p>
+</div></blockquote>
+<p><strong>std_dist_sample</strong> : float</p>
+<blockquote class="last">
+<div><p>The standard deviation of d computed from the peaks used.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Complete Reference (API)</a><ul>
+  <li><a href="../index.html">Core API</a><ul>
+  <li><a href="../calibration.html"><code class="docutils literal"><span class="pre">calibration</span></code></a><ul>
+      <li>Previous: <a href="../calibration.html" title="previous chapter"><code class="docutils literal"><span class="pre">calibration</span></code></a></li>
+      <li>Next: <a href="skbeam.core.calibration.refine_center.html" title="next chapter">skbeam.core.calibration.refine_center</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.calibration.estimate_d_blind.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.calibration.estimate_d_blind.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

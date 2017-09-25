@@ -1,0 +1,257 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Git workflow &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Documentation" href="doc_doc.html" />
+    <link rel="prev" title="Introduction to Git" href="git_guide.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="git-workflow">
+<span id="workflow"></span><h1>Git workflow<a class="headerlink" href="#git-workflow" title="Permalink to this headline">¶</a></h1>
+<p>The basic workflow is that you develop new code on feature branches in
+your local repository.  When you want your code merged into the main
+repository you push your work to <code class="docutils literal"><span class="pre">github</span></code> and create a “Pull
+Request” (PR).  The code is then reviewed and once everyone is happy,
+it will be merged into <code class="docutils literal"><span class="pre">scikit-beam/master</span></code>.</p>
+<div class="section" id="rules">
+<h2>Rules<a class="headerlink" href="#rules" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ol class="arabic simple">
+<li>Don’t work directly on the main repository, push commits to your
+personal github repository</li>
+<li>Never work on <code class="docutils literal"><span class="pre">master</span></code>, always work on a feature branch</li>
+<li>Don’t merge your own PR.</li>
+<li>Don’t merge <code class="docutils literal"><span class="pre">scikit-beam/master</span></code> into your feature branch
+as this can make merging back into master tricky.</li>
+<li>Commit messages must be at least one sentence and preferably a short
+paragraph.  They should not be longer than 2 paragraphs (if you need to
+write that much the commit should probably be split up).</li>
+<li>Commit messages should start with a descriptor code (borrowed from numpy
+), see table below.</li>
+<li>Add a file in <code class="docutils literal"><span class="pre">changelog</span></code> describing the propose of this branch
+in a sentence.  When we make releases these will be compiled into
+a <code class="docutils literal"><span class="pre">CHANGELOG</span></code>.  Doing it this way prevents excessive merge conflicts.</li>
+<li>Add a test for every new function you add</li>
+<li>When you fix a bug add a test that used to fail and now passes</li>
+</ol>
+</div></blockquote>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Code</th>
+<th class="head">description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>API</td>
+<td>an (incompatible) API change</td>
+</tr>
+<tr class="row-odd"><td>BLD</td>
+<td>change related to building</td>
+</tr>
+<tr class="row-even"><td>BUG</td>
+<td>bug fix</td>
+</tr>
+<tr class="row-odd"><td>DEP</td>
+<td>deprecate something, or remove a deprecated object</td>
+</tr>
+<tr class="row-even"><td>DEV</td>
+<td>development tool or utility</td>
+</tr>
+<tr class="row-odd"><td>DOC</td>
+<td>documentation</td>
+</tr>
+<tr class="row-even"><td>ENH</td>
+<td>enhancement</td>
+</tr>
+<tr class="row-odd"><td>MNT</td>
+<td>maintenance commit (refactoring, typos, etc.)</td>
+</tr>
+<tr class="row-even"><td>REV</td>
+<td>revert an earlier commit</td>
+</tr>
+<tr class="row-odd"><td>STY</td>
+<td>style fix (whitespace, PEP8)</td>
+</tr>
+<tr class="row-even"><td>TST</td>
+<td>addition or modification of tests</td>
+</tr>
+<tr class="row-odd"><td>REL</td>
+<td>related to releasing numpy</td>
+</tr>
+<tr class="row-even"><td>WIP</td>
+<td>Commit that is a work in progress</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="style">
+<h2>Style<a class="headerlink" href="#style" title="Permalink to this headline">¶</a></h2>
+<p>We will conform to the sensible rules in <a class="reference external" href="http://legacy.python.org/dev/peps/pep-0008/">PEP8</a>.</p>
+<p>Some handy tools are :</p>
+<blockquote>
+<div><ul class="simple">
+<li>the <a class="reference external" href="https://pypi.python.org/pypi/pep8">pep8 checker</a> which will
+report and violations in your code.  Most decent editors will have
+a way to run this on the fly and highlight your code (ex emacs, vi, pycharm,
+pydev, kate, and sublime)</li>
+<li>flake8</li>
+</ul>
+</div></blockquote>
+<div class="section" id="if-statements">
+<h3>if-statements<a class="headerlink" href="#if-statements" title="Permalink to this headline">¶</a></h3>
+<p>Don’t write one-liner if statements as</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">foo</span><span class="p">:</span> <span class="n">bar</span>
+</pre></div>
+</div>
+<p>write them as</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">foo</span><span class="p">:</span>
+    <span class="n">bar</span>
+</pre></div>
+</div>
+<p>Lines are free, but the confusion that can be caused by missing
+logic when scanning code can be expensive.</p>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>Assuming you already have your repository set up:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">fetch</span> <span class="n">upstream</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>  <span class="c1"># switch to master</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">upstream</span><span class="o">/</span><span class="n">master</span>  <span class="c1"># make sure master is up-to-date</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">new_feature</span>
+</pre></div>
+</div>
+<p>You now do a bunch of work:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">...</span>
+<span class="n">git</span> <span class="n">commit</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">...</span>
+<span class="n">git</span> <span class="n">commit</span>
+</pre></div>
+</div>
+<p>and when you are happy with it <strong>push</strong> it to github</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="o">--</span><span class="nb">set</span><span class="o">-</span><span class="n">upstream</span> <span class="n">github</span> <span class="n">new_feature</span>
+</pre></div>
+</div>
+<p>On the github webpage navigate to your repository and there should be a
+green button that says ‘Compare and Pull request’.  Push this button and
+fill out the form.  This will create the PR and the change can be discussed
+on github.  To make changes to the PR all you need to do is <strong>push</strong> more
+commits to that branch on github</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">add</span> <span class="o">...</span>
+<span class="n">git</span> <span class="n">commit</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">github</span>
+</pre></div>
+</div>
+<p>Once everyone is happy with the changes, the branch can be merged into
+the main <code class="docutils literal"><span class="pre">master</span></code> branch via the web interface.  If there are
+conflicts on <code class="docutils literal"><span class="pre">master</span></code> with your work, it is your responsibility to
+<strong>rebase</strong> your branch on to the current <code class="docutils literal"><span class="pre">master</span></code>.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Git workflow</a><ul>
+<li><a class="reference internal" href="#rules">Rules</a></li>
+<li><a class="reference internal" href="#style">Style</a><ul>
+<li><a class="reference internal" href="#if-statements">if-statements</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Development Guide</a><ul>
+      <li>Previous: <a href="git_guide.html" title="previous chapter">Introduction to Git</a></li>
+      <li>Next: <a href="doc_doc.html" title="next chapter">Documentation</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/resource/dev_guide/workflow.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/resource/dev_guide/workflow.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,1014 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>xrf_model Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="background Module" href="lineshapes.html" />
+    <link rel="prev" title="funcs Module" href="background.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.core.fitting.xrf_model">
+<span id="xrf-model-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">xrf_model</span></code> Module<a class="headerlink" href="#module-skbeam.core.fitting.xrf_model" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="skbeam.core.fitting.xrf_model.ElementModel">
+<em class="property">class </em><code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">ElementModel</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ElementModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">lmfit.model.Model</span></code></p>
+<p>Wrap the element_peak_xrf function for fitting within lmfit framework</p>
+<p>This is a function to construct xrf element peak, which is based on
+gauss profile, but more specific requirements need to be
+considered. For instance, the standard deviation is replaced by
+global fitting parameters, and energy calibration on x is taken into
+account.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>independent variable, channel number instead of energy</p>
+</div></blockquote>
+<p><strong>area</strong> : float</p>
+<blockquote>
+<div><p>area of gaussian function</p>
+</div></blockquote>
+<p><strong>center</strong> : float</p>
+<blockquote>
+<div><p>center position</p>
+</div></blockquote>
+<p><strong>delta_center</strong> : float</p>
+<blockquote>
+<div><p>adjustment to center position</p>
+</div></blockquote>
+<p><strong>delta_sigma</strong> : float</p>
+<blockquote>
+<div><p>adjustment to standard deviation</p>
+</div></blockquote>
+<p><strong>ratio</strong> : float</p>
+<blockquote>
+<div><p>branching ratio</p>
+</div></blockquote>
+<p><strong>ratio_adjust</strong> : float</p>
+<blockquote>
+<div><p>value used to adjust peak height</p>
+</div></blockquote>
+<p><strong>fwhm_offset</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>fwhm_fanoprime</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>e_offset</strong> : float</p>
+<blockquote>
+<div><p>offset of energy calibration</p>
+</div></blockquote>
+<p><strong>e_linear</strong> : float</p>
+<blockquote>
+<div><p>linear coefficient in energy calibration</p>
+</div></blockquote>
+<p><strong>e_quadratic</strong> : float</p>
+<blockquote>
+<div><p>quadratic coefficient in energy calibration</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array:</p>
+<blockquote class="last">
+<div><p>gaussian peak profile</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="skbeam.core.fitting.xrf_model.ModelSpectrum">
+<em class="property">class </em><code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">ModelSpectrum</code><span class="sig-paren">(</span><em>params</em>, <em>elemental_lines</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ModelSpectrum" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Construct Fluorescence spectrum which includes elastic peak,
+compton and element peaks.</p>
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ModelSpectrum.assemble_models">
+<code class="descname">assemble_models</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ModelSpectrum.assemble_models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Put all models together to form a spectrum.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ModelSpectrum.model_fit">
+<code class="descname">model_fit</code><span class="sig-paren">(</span><em>channel_number</em>, <em>spectrum</em>, <em>weights=None</em>, <em>method='leastsq'</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ModelSpectrum.model_fit" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>channel_number</strong> : array</p>
+<blockquote>
+<div><p>independent variable</p>
+</div></blockquote>
+<p><strong>spectrum</strong> : array</p>
+<blockquote>
+<div><p>intensity</p>
+</div></blockquote>
+<p><strong>weights</strong> : array, optional</p>
+<blockquote>
+<div><p>weight for fitting</p>
+</div></blockquote>
+<p><strong>method</strong> : str</p>
+<blockquote>
+<div><p>default as leastsq</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : dict</p>
+<blockquote>
+<div><p>fitting criteria, such as max number of iteration</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">result object from lmfit</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ModelSpectrum.setup_compton_model">
+<code class="descname">setup_compton_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ModelSpectrum.setup_compton_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>setup parameters related to Compton model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ModelSpectrum.setup_elastic_model">
+<code class="descname">setup_elastic_model</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ModelSpectrum.setup_elastic_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>setup parameters related to Elastic model</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ModelSpectrum.setup_element_model">
+<code class="descname">setup_element_model</code><span class="sig-paren">(</span><em>elemental_line</em>, <em>default_area=100000.0</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ModelSpectrum.setup_element_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Construct element model. Elemental line that can be add include elemental
+peak, pileup peak and user peak. User peak is a fake peak, but can be used
+as a quick replacement for pileup peaks, escape peaks or other unknown peaks
+due to detector defects or scattering process.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>elemental_line</strong> : str</p>
+<blockquote>
+<div><p>elemental line, such as ‘Fe_K’
+pileup peak, such as ‘Si_Ka1-Si_Ka1’
+user peak, such as ‘user_peak1’, ‘user_peak2’</p>
+</div></blockquote>
+<p><strong>default_area</strong> : float, optional</p>
+<blockquote class="last">
+<div><p>value for the initial area of a given element
+default is 1e5, found to be a good value</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="skbeam.core.fitting.xrf_model.ParamController">
+<em class="property">class </em><code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">ParamController</code><span class="sig-paren">(</span><em>params</em>, <em>elemental_lines</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ParamController" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/functions.html#object" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">object</span></code></a></p>
+<p>Update element peak information in parameter dictionary.
+This is an important step in dynamical fitting.</p>
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ParamController.add_param">
+<code class="descname">add_param</code><span class="sig-paren">(</span><em>kind</em>, <em>element</em>, <em>constraint=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ParamController.add_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a Parameter controlling peak position, width,
+branching ratio, or area.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>kind</strong> : {‘pos’, ‘width’, ‘ratio’, ‘area’}</p>
+<p><strong>element</strong> : str</p>
+<blockquote>
+<div><p>element name</p>
+</div></blockquote>
+<p><strong>constraint</strong> : {‘lo’, ‘hi’, ‘lohi’, ‘fixed’, ‘none’}, optional</p>
+<blockquote>
+<div><p>default “bound strategy” (fitting constraints)</p>
+</div></blockquote>
+<p><strong>.. note:: Element that can be add include elemental peak, pileup peak and user peak.</strong></p>
+<p><strong>User peak is a fake peak, but can be used as a quick replacement for pileup peaks,</strong></p>
+<p class="last"><strong>escape peaks or other unknown peaks due to detector defects or scattering process.</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ParamController.set_strategy">
+<code class="descname">set_strategy</code><span class="sig-paren">(</span><em>strategy_name</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ParamController.set_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the default value of bounds.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>strategy_name</strong> : str</p>
+<blockquote class="last">
+<div><p>fitting strategy that this Model will use</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="skbeam.core.fitting.xrf_model.ParamController.update_element_prop">
+<code class="descname">update_element_prop</code><span class="sig-paren">(</span><em>element_list</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.ParamController.update_element_prop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update element properties, such as pos, width, area and ratio.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>element_list</strong> : list</p>
+<blockquote>
+<div><p>define which element to update</p>
+</div></blockquote>
+<p><strong>kwargs</strong> : dict</p>
+<blockquote>
+<div><p>define what kind of property to change</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last"><strong>dict</strong> : updated value</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.calculate_area">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">calculate_area</code><span class="sig-paren">(</span><em>e_select</em>, <em>matv</em>, <em>results</em>, <em>param</em>, <em>first_peak_area=False</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.calculate_area" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>e_select</strong> : list</p>
+<blockquote>
+<div><p>elements</p>
+</div></blockquote>
+<p><strong>matv</strong> : 2D array</p>
+<blockquote>
+<div><p>matrix constains elemental profile as columns</p>
+</div></blockquote>
+<p><strong>results</strong> : 3D array</p>
+<blockquote>
+<div><p>x, y positions, and each element’s weight on third dim</p>
+</div></blockquote>
+<p><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>parameters of fitting</p>
+</div></blockquote>
+<p><strong>first_peak_area</strong> : Bool, optional</p>
+<blockquote>
+<div><p>get overal peak area or only the first peak area, such as Ar_Ka1</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dict :</p>
+<blockquote class="last">
+<div><p>dict of each 2D elemental distribution</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.compute_escape_peak">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">compute_escape_peak</code><span class="sig-paren">(</span><em>spectrum</em>, <em>ratio</em>, <em>params</em>, <em>escape_e=1.73998</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.compute_escape_peak" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the escape peak for given detector.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>spectrum</strong> : array</p>
+<blockquote>
+<div><p>original, uncorrected spectrum</p>
+</div></blockquote>
+<p><strong>ratio</strong> : float</p>
+<blockquote>
+<div><p>ratio of shadow to full spectrum</p>
+</div></blockquote>
+<p><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>fitting parameters</p>
+</div></blockquote>
+<p><strong>escape_e</strong> : float</p>
+<blockquote>
+<div><p>Units: keV
+By default, 1.73998 (Ka1 line of Si)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array:</p>
+<blockquote class="last">
+<div><p>x after shift, and adjusted y</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.construct_linear_model">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">construct_linear_model</code><span class="sig-paren">(</span><em>channel_number</em>, <em>params</em>, <em>elemental_lines</em>, <em>default_area=100</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.construct_linear_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create spectrum with parameters given from params.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>channel_number</strong> : array</p>
+<blockquote>
+<div><p>N.B. This is the raw independent variable, not energy.</p>
+</div></blockquote>
+<p><strong>params</strong> : dict</p>
+<blockquote>
+<div><p>fitting parameters</p>
+</div></blockquote>
+<p><strong>elemental_lines</strong> : list</p>
+<blockquote>
+<div><p>e.g., [‘Na_K’, Mg_K’, ‘Pt_M’] refers to the
+K lines of Sodium, the K lines of Magnesium, and the M
+lines of Platinum</p>
+</div></blockquote>
+<p><strong>default_area</strong> : float</p>
+<blockquote>
+<div><p>value for the initial area of a given element</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>selected_elements</strong> : list</p>
+<blockquote>
+<div><p>selected elements for given energy</p>
+</div></blockquote>
+<p><strong>matv</strong> : array</p>
+<blockquote>
+<div><p>matrix for linear fitting</p>
+</div></blockquote>
+<p><strong>element_area</strong> : dict</p>
+<blockquote class="last">
+<div><p>area of the given elements</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.define_range">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">define_range</code><span class="sig-paren">(</span><em>data</em>, <em>low</em>, <em>high</em>, <em>a0</em>, <em>a1</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.define_range" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cut x range based on offset and linear term of a linear function.
+a0 and a1 should be defined in param_dict.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : 1D array</p>
+<blockquote>
+<div><p>raw spectrum</p>
+</div></blockquote>
+<p><strong>low</strong> : float</p>
+<blockquote>
+<div><p>low bound in KeV</p>
+</div></blockquote>
+<p><strong>high</strong> : float</p>
+<blockquote>
+<div><p>high bound in KeV</p>
+</div></blockquote>
+<p><strong>a0</strong> : float</p>
+<blockquote>
+<div><p>offset term of energy calibration</p>
+</div></blockquote>
+<p><strong>a1</strong> : float</p>
+<blockquote>
+<div><p>linear term of energy calibration</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>trimmed channel number</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote class="last">
+<div><p>trimmed spectrum according to x</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.element_peak_xrf">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">element_peak_xrf</code><span class="sig-paren">(</span><em>x</em>, <em>area</em>, <em>center</em>, <em>delta_center</em>, <em>delta_sigma</em>, <em>ratio</em>, <em>ratio_adjust</em>, <em>fwhm_offset</em>, <em>fwhm_fanoprime</em>, <em>e_offset</em>, <em>e_linear</em>, <em>e_quadratic</em>, <em>epsilon=2.96</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.element_peak_xrf" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a function to construct xrf element peak, which is based on
+gauss profile, but more specific requirements need to be
+considered. For instance, the standard deviation is replaced by
+global fitting parameters, and energy calibration on x is taken into
+account.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>independent variable, channel number instead of energy</p>
+</div></blockquote>
+<p><strong>area</strong> : float</p>
+<blockquote>
+<div><p>area of gaussian function</p>
+</div></blockquote>
+<p><strong>center</strong> : float</p>
+<blockquote>
+<div><p>center position</p>
+</div></blockquote>
+<p><strong>delta_center</strong> : float</p>
+<blockquote>
+<div><p>adjustment to center position</p>
+</div></blockquote>
+<p><strong>delta_sigma</strong> : float</p>
+<blockquote>
+<div><p>adjustment to standard deviation</p>
+</div></blockquote>
+<p><strong>ratio</strong> : float</p>
+<blockquote>
+<div><p>branching ratio</p>
+</div></blockquote>
+<p><strong>ratio_adjust</strong> : float</p>
+<blockquote>
+<div><p>value used to adjust peak height</p>
+</div></blockquote>
+<p><strong>fwhm_offset</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>fwhm_fanoprime</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>e_offset</strong> : float</p>
+<blockquote>
+<div><p>offset of energy calibration</p>
+</div></blockquote>
+<p><strong>e_linear</strong> : float</p>
+<blockquote>
+<div><p>linear coefficient in energy calibration</p>
+</div></blockquote>
+<p><strong>e_quadratic</strong> : float</p>
+<blockquote>
+<div><p>quadratic coefficient in energy calibration</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array:</p>
+<blockquote class="last">
+<div><p>gaussian peak profile</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.extract_strategy">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">extract_strategy</code><span class="sig-paren">(</span><em>param</em>, <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.extract_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extract given strategy from param dict.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>saving all parameters for data fitting</p>
+</div></blockquote>
+<p><strong>name</strong> : str</p>
+<blockquote>
+<div><p>strategy name</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">dict :</p>
+<blockquote class="last">
+<div><p>with given strategy as value</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.fit_per_line_nnls">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">fit_per_line_nnls</code><span class="sig-paren">(</span><em>data</em>, <em>matv</em>, <em>param</em>, <em>use_snip</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.fit_per_line_nnls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit experiment data for a given row using nnls algorithm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>data</strong> : array</p>
+<blockquote>
+<div><p>selected one row of experiment spectrum</p>
+</div></blockquote>
+<p><strong>matv</strong> : array</p>
+<blockquote>
+<div><p>matrix for regression analysis</p>
+</div></blockquote>
+<p><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>fitting parameters</p>
+</div></blockquote>
+<p><strong>use_snip</strong> : bool</p>
+<blockquote>
+<div><p>use snip algorithm to remove background or not</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array :</p>
+<blockquote class="last">
+<div><p>fitting values for all the elements at a given row. Background is
+calculated as a summed value. Also residual is included.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.fit_pixel_multiprocess_nnls">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">fit_pixel_multiprocess_nnls</code><span class="sig-paren">(</span><em>exp_data</em>, <em>matv</em>, <em>param</em>, <em>use_snip=False</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.fit_pixel_multiprocess_nnls" title="Permalink to this definition">¶</a></dt>
+<dd><p>Multiprocess fit of experiment data.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>exp_data</strong> : array</p>
+<blockquote>
+<div><p>3D data of experiment spectrum,
+with x,y positions as the first 2-dim, and energy as the third one.</p>
+</div></blockquote>
+<p><strong>matv</strong> : array</p>
+<blockquote>
+<div><p>matrix for regression analysis</p>
+</div></blockquote>
+<p><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>fitting parameters</p>
+</div></blockquote>
+<p><strong>use_snip</strong> : bool, optional</p>
+<blockquote>
+<div><p>use snip algorithm to remove background or not</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array</p>
+<blockquote class="last">
+<div><p>Fitting values for all the elements</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.get_activated_lines">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">get_activated_lines</code><span class="sig-paren">(</span><em>incident_energy</em>, <em>elemental_lines</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.get_activated_lines" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>incident_energy</strong> : float</p>
+<blockquote>
+<div><p>beam energy</p>
+</div></blockquote>
+<p><strong>element_lines</strong> : list</p>
+<blockquote>
+<div><p>e.g., [‘Na_K’, ‘Mg_K’, ‘Pt_M’]</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">list</p>
+<blockquote class="last">
+<div><p>all activated lines for given elements</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.get_line_energy">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">get_line_energy</code><span class="sig-paren">(</span><em>elemental_line</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.get_line_energy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the energy of the first line in K, L or M series.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>elemental_line</strong> : str</p>
+<blockquote>
+<div><p>For instance, Eu_L is the format for L lines and Pt_M for M lines.
+And for K lines, user needs to define lines like ka1, kb1,
+because for K lines, we consider contributions from either ka1
+or kb1, while for L or M lines, we only consider the primary peak.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">float :</p>
+<blockquote class="last">
+<div><p>energy of emission line</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.get_relative_cs_ratio">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">get_relative_cs_ratio</code><span class="sig-paren">(</span><em>elemental_line</em>, <em>energy</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.get_relative_cs_ratio" title="Permalink to this definition">¶</a></dt>
+<dd><p>At given energy, multiple elemental lines may be activated. This function is
+used to calculate the ratio of the first line’s cross section (cs) to
+the summed cross section from all the lines.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>elemental_line</strong> : str</p>
+<blockquote>
+<div><p>e.g., ‘Mg_K’, refers to the K lines of Magnesium</p>
+</div></blockquote>
+<p><strong>energy</strong> : float</p>
+<blockquote>
+<div><p>incident energy in keV</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">float :</p>
+<blockquote class="last">
+<div><p>calculated ratio</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.linear_spectrum_fitting">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">linear_spectrum_fitting</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>params</em>, <em>elemental_lines=None</em>, <em>weights=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.linear_spectrum_fitting" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fit a spectrum to a linear model.</p>
+<p>This is a convenience function that wraps up construct_linear_model
+and nnls_fit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>channel array</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>spectrum intensity</p>
+</div></blockquote>
+<p><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>fitting parameters</p>
+</div></blockquote>
+<p><strong>elemental_lines</strong> : list, optional</p>
+<blockquote>
+<div><p>e.g., [‘Na_K’, Mg_K’, ‘Pt_M’] refers to the
+K lines of Sodium, the K lines of Magnesium, and the M
+lines of Platinum. If elemental_lines is set as None,
+all the possible lines activated at given energy will be used.</p>
+</div></blockquote>
+<p><strong>weights</strong> : array, optional</p>
+<blockquote>
+<div><p>for weighted nnls fitting. Setting weights as None means fitting
+without weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>x_energy</strong> : array</p>
+<blockquote>
+<div><p>x axis with unit in energy</p>
+</div></blockquote>
+<p><strong>result_dict</strong> : dict</p>
+<blockquote>
+<div><p>Fitting results</p>
+</div></blockquote>
+<p><strong>area_dict</strong> : dict</p>
+<blockquote class="last">
+<div><p>the area of the first main peak, such as Ka1, of a given element</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.nnls_fit">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">nnls_fit</code><span class="sig-paren">(</span><em>spectrum</em>, <em>expected_matrix</em>, <em>weights=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.nnls_fit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Non-negative least squares fitting.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>spectrum</strong> : array</p>
+<blockquote>
+<div><p>spectrum of experiment data</p>
+</div></blockquote>
+<p><strong>expected_matrix</strong> : array</p>
+<blockquote>
+<div><p>2D matrix of activated element spectrum</p>
+</div></blockquote>
+<p><strong>weights</strong> : array, optional</p>
+<blockquote>
+<div><p>for weighted nnls fitting. Setting weights as None means fitting
+without weights.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>results</strong> : array</p>
+<blockquote>
+<div><p>weights of different element</p>
+</div></blockquote>
+<p><strong>residue</strong> : float</p>
+<blockquote>
+<div><p>error</p>
+</div></blockquote>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">nnls is chosen as amplitude of each element should not be negative.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.register_strategy">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">register_strategy</code><span class="sig-paren">(</span><em>key</em>, <em>strategy</em>, <em>overwrite=True</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.register_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Register new strategy.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>key</strong> : str</p>
+<blockquote>
+<div><p>strategy name</p>
+</div></blockquote>
+<p><strong>strategy</strong> : dict</p>
+<blockquote class="last">
+<div><p>bound for every parameter</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.set_parameter_bound">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">set_parameter_bound</code><span class="sig-paren">(</span><em>param</em>, <em>bound_option</em>, <em>extra_config=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.set_parameter_bound" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update the default value of bounds.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function mutates the input values.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>saving all the fitting values and their bounds</p>
+</div></blockquote>
+<p><strong>bound_option</strong> : str</p>
+<blockquote>
+<div><p>define bound type</p>
+</div></blockquote>
+<p><strong>extra_config</strong> : dict</p>
+<blockquote class="last">
+<div><p>strategy-specific configuration</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.sum_area">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">sum_area</code><span class="sig-paren">(</span><em>elemental_line</em>, <em>result_val</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.sum_area" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the total area for given element.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>elemental_line</strong> : str</p>
+<blockquote>
+<div><p>name of a given element line, such as Na_K</p>
+</div></blockquote>
+<p><strong>result_val</strong> : obj</p>
+<blockquote>
+<div><p>result obj from lmfit to save all the fitting results</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>sumv</strong> : float</p>
+<blockquote class="last">
+<div><p>the total area</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.trim">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">trim</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>low</em>, <em>high</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.trim" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mask two arrays applying bounds to the first array.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>independent variable</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>dependent variable</p>
+</div></blockquote>
+<p><strong>low</strong> : float</p>
+<blockquote>
+<div><p>low bound</p>
+</div></blockquote>
+<p><strong>high</strong> : float</p>
+<blockquote>
+<div><p>high bound</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">array :</p>
+<blockquote>
+<div><p>x with new range</p>
+</div></blockquote>
+<p>array :</p>
+<blockquote class="last">
+<div><p>y with new range</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.xrf_model.update_parameter_dict">
+<code class="descclassname">skbeam.core.fitting.xrf_model.</code><code class="descname">update_parameter_dict</code><span class="sig-paren">(</span><em>param</em>, <em>fit_results</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.xrf_model.update_parameter_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Update fitting parameters dictionary according to given fitting results,
+usually obtained from previous run.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This function mutates param.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>param</strong> : dict</p>
+<blockquote>
+<div><p>saving all the fitting values and their bounds</p>
+</div></blockquote>
+<p><strong>fit_results</strong> : object</p>
+<blockquote class="last">
+<div><p>ModelFit object from lmfit</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Complete Reference (API)</a><ul>
+  <li><a href="../index.html">Core API</a><ul>
+  <li><a href="index.html">Fitting API</a><ul>
+      <li>Previous: <a href="background.html" title="previous chapter"><code class="docutils literal"><span class="pre">funcs</span></code> Module</a></li>
+      <li>Next: <a href="lineshapes.html" title="next chapter"><code class="docutils literal"><span class="pre">background</span></code> Module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/resource/api/core/fitting/funcs.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../../_sources/resource/api/core/fitting/funcs.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

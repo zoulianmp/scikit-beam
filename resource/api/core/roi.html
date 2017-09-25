@@ -1,0 +1,707 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.roi Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="core.spectroscopy Module" href="spectroscopy.html" />
+    <link rel="prev" title="core.recip Module" href="recip.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.core.roi">
+<span id="core-roi-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">core.roi</span></code> Module<a class="headerlink" href="#module-skbeam.core.roi" title="Permalink to this headline">¶</a></h1>
+<p>This module contain convenience methods to generate ROI labeled arrays for
+simple shapes such as rectangles and concentric circles.</p>
+<dl class="function">
+<dt id="skbeam.core.roi.auto_find_center_rings">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">auto_find_center_rings</code><span class="sig-paren">(</span><em>avg_img</em>, <em>sigma=1</em>, <em>no_rings=4</em>, <em>min_samples=3</em>, <em>residual_threshold=1</em>, <em>max_trials=1000</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.auto_find_center_rings" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will find the center of the speckle pattern and the radii of the
+most intense rings.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>avg_img</strong> : 2D array</p>
+<blockquote>
+<div><p>shape of the image</p>
+</div></blockquote>
+<p><strong>sigma</strong> : float, optional</p>
+<blockquote>
+<div><p>Standard deviation of the Gaussian filter.</p>
+</div></blockquote>
+<p><strong>no_rings</strong> : int, optional</p>
+<blockquote>
+<div><p>number of rings</p>
+</div></blockquote>
+<p><strong>min_sample</strong> : int, optional</p>
+<blockquote>
+<div><p>The minimum number of data points to fit a model to.</p>
+</div></blockquote>
+<p><strong>residual_threshold</strong> : float, optional</p>
+<blockquote>
+<div><p>Maximum distance for a data point to be classified as an inlier.</p>
+</div></blockquote>
+<p><strong>max_trials</strong> : int, optional</p>
+<blockquote>
+<div><p>Maximum number of iterations for random sample selection.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> : tuple</p>
+<blockquote>
+<div><p>center co-ordinates of the speckle pattern</p>
+</div></blockquote>
+<p><strong>image</strong> : 2D array</p>
+<blockquote>
+<div><p>Indices of pixels that belong to the rings,
+directly index into an array</p>
+</div></blockquote>
+<p><strong>radii</strong> : list</p>
+<blockquote class="last">
+<div><p>values of the radii of the rings</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.bar">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">bar</code><span class="sig-paren">(</span><em>edges</em>, <em>shape</em>, <em>horizontal=True</em>, <em>values=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.bar" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw bars defined by <cite>edges</cite> from one edge to the other of <cite>image_shape</cite></p>
+<p>Bars will be horizontal or vertical depending on the value of <cite>horizontal</cite></p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>edges</strong> : list</p>
+<blockquote>
+<div><p>List of tuples of inner (left or top) and outer (right or bottom)
+edges of each bar.
+e.g., edges=[(1, 2), (11, 12), (21, 22)]</p>
+</div></blockquote>
+<p><strong>shape</strong> : tuple</p>
+<blockquote>
+<div><p>Shape of the image in which to create the ROIs
+e.g., shape=(512, 512)</p>
+</div></blockquote>
+<p><strong>horizontal</strong> : bool, optional</p>
+<blockquote>
+<div><p>True: Make horizontal bars
+False: Make vertical bars
+Defaults to True</p>
+</div></blockquote>
+<p><strong>values</strong> : array, optional</p>
+<blockquote>
+<div><p>image pixels co-ordinates</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>label_array</strong> : array</p>
+<blockquote class="last">
+<div><p>Elements not inside any ROI are zero; elements inside each
+ROI are 1, 2, 3, corresponding to the order they are
+specified in <cite>edges</cite>.
+Has shape=`image shape`</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.box">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">box</code><span class="sig-paren">(</span><em>shape</em>, <em>v_edges</em>, <em>h_edges=None</em>, <em>h_values=None</em>, <em>v_values=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.box" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>Draw box shaped rois when the horizontal and vertical edges</dt>
+<dd>are provided.</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>shape</strong> : tuple</p>
+<blockquote>
+<div><p>Shape of the image in which to create the ROIs
+e.g., shape=(512, 512)</p>
+</div></blockquote>
+<p><strong>v_edges</strong> : list</p>
+<blockquote>
+<div><p>giving the inner and outer edges of each vertical bar
+e.g., [(1, 2), (11, 12), (21, 22)]</p>
+</div></blockquote>
+<p><strong>h_edges</strong> : list, optional</p>
+<blockquote>
+<div><p>giving the inner and outer edges of each horizontal bar
+e.g., [(1, 2), (11, 12), (21, 22)]</p>
+</div></blockquote>
+<p><strong>h_values</strong> : array, optional</p>
+<blockquote>
+<div><p>image pixels co-ordinates in horizontal direction
+shape has to be image shape</p>
+</div></blockquote>
+<p><strong>v_values</strong> : array, optional</p>
+<blockquote>
+<div><p>image pixels co-ordinates in vertical direction
+shape has to be image shape</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>label_array</strong> : array</p>
+<blockquote class="last">
+<div><p>Elements not inside any ROI are zero; elements inside each
+ROI are 1, 2, 3, corresponding to the order they are specified
+in edges.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.circular_average">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">circular_average</code><span class="sig-paren">(</span><em>image</em>, <em>calibrated_center</em>, <em>threshold=0</em>, <em>nx=100</em>, <em>pixel_size=(1</em>, <em>1)</em>, <em>min_x=None</em>, <em>max_x=None</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.circular_average" title="Permalink to this definition">¶</a></dt>
+<dd><p>Circular average of the the image data
+The circular average is also known as the radial integration</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>image</strong> : array</p>
+<blockquote>
+<div><p>Image to compute the average as a function of radius</p>
+</div></blockquote>
+<p><strong>calibrated_center</strong> : tuple</p>
+<blockquote>
+<div><p>The center of the image in pixel units
+argument order should be (row, col)</p>
+</div></blockquote>
+<p><strong>threshold</strong> : int, optional</p>
+<blockquote>
+<div><p>Ignore counts below <cite>threshold</cite>
+default is zero</p>
+</div></blockquote>
+<p><strong>nx</strong> : int, optional</p>
+<blockquote>
+<div><p>number of bins in x
+defaults is 100 bins</p>
+</div></blockquote>
+<p><strong>pixel_size</strong> : tuple, optional</p>
+<blockquote>
+<div><p>The size of a pixel (in a real unit, like mm).
+argument order should be (pixel_height, pixel_width)
+default is (1, 1)</p>
+</div></blockquote>
+<p><strong>min_x</strong> : float, optional number of pixels</p>
+<blockquote>
+<div><p>Left edge of first bin defaults to minimum value of x</p>
+</div></blockquote>
+<p><strong>max_x</strong> : float, optional number of pixels</p>
+<blockquote>
+<div><p>Right edge of last bin defaults to maximum value of x</p>
+</div></blockquote>
+<p><strong>mask</strong> : mask for 2D data. Assumes 1 is non masked and 0 masked.</p>
+<blockquote>
+<div><p>None defaults to no mask.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bin_centers</strong> : array</p>
+<blockquote>
+<div><p>The center of each bin in R. shape is (nx, )</p>
+</div></blockquote>
+<p><strong>ring_averages</strong> : array</p>
+<blockquote class="last">
+<div><p>Radial average of the image. shape is (nx, ).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal"><span class="pre">bad_to_nan_gen</span></code></dt>
+<dd>Create a mask with np.nan entries</dd>
+<dt><code class="xref py py-obj docutils literal"><span class="pre">bin_grid</span></code></dt>
+<dd>Bin and integrate an image, given the radial array of pixels Useful for nonlinear spacing (Ewald curvature)</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.extract_label_indices">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">extract_label_indices</code><span class="sig-paren">(</span><em>labels</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.extract_label_indices" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will find the label’s required region of interests (roi’s),
+number of roi’s count the number of pixels in each roi’s and pixels
+list for the required roi’s.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>labels</strong> : array</p>
+<blockquote>
+<div><p>labeled array; 0 is background.
+Each ROI is represented by a distinct label (i.e., integer).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>label_mask</strong> : array</p>
+<blockquote>
+<div><p>1D array labeling each foreground pixel
+e.g., [1, 1, 1, 1, 2, 2, 1, 1]</p>
+</div></blockquote>
+<p><strong>indices</strong> : array</p>
+<blockquote class="last">
+<div><p>1D array of indices into the raveled image for all
+foreground pixels (labeled nonzero)
+e.g., [5, 6, 7, 8, 14, 15, 21, 22]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.kymograph">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">kymograph</code><span class="sig-paren">(</span><em>images</em>, <em>labels</em>, <em>num</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.kymograph" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function will provide data for graphical representation of pixels
+variation over time for required ROI.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>images</strong> : array</p>
+<blockquote>
+<div><p>Image stack. dimensions are: (num_img, num_rows, num_cols)</p>
+</div></blockquote>
+<p><strong>labels</strong> : array</p>
+<blockquote>
+<div><p>labeled array; 0 is background. Each ROI is represented by an integer</p>
+</div></blockquote>
+<p><strong>num</strong> : int</p>
+<blockquote>
+<div><p>The ROI to turn into a kymograph</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>kymograph</strong> : array</p>
+<blockquote class="last">
+<div><p>data for graphical representation of pixels variation over time
+for required ROI</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.lines">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">lines</code><span class="sig-paren">(</span><em>end_points</em>, <em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.lines" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>end_points</strong> : iterable</p>
+<blockquote>
+<div><p>coordinates of the starting point and the ending point of each
+line: e.g., [(start_x, start_y, end_x, end_y), (x1, y1, x2, y2)]</p>
+</div></blockquote>
+<p><strong>shape</strong> : tuple</p>
+<blockquote>
+<div><p>Image shape which is used to determine the maximum extent of output
+pixel coordinates. Order is (rr, cc).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>label_array</strong> : array</p>
+<blockquote class="last">
+<div><p>Elements not inside any ROI are zero; elements inside each
+ROI are 1, 2, 3, corresponding to the order they are specified
+in coords. Order is (rr, cc).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.mean_intensity">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">mean_intensity</code><span class="sig-paren">(</span><em>images</em>, <em>labeled_array</em>, <em>index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.mean_intensity" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the mean intensity for each ROI in the image list</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>images</strong> : list</p>
+<blockquote>
+<div><p>List of images</p>
+</div></blockquote>
+<p><strong>labeled_array</strong> : array</p>
+<blockquote>
+<div><p>labeled array; 0 is background.
+Each ROI is represented by a nonzero integer. It is not required that
+the ROI labels are contiguous</p>
+</div></blockquote>
+<p><strong>index</strong> : int, list, optional</p>
+<blockquote>
+<div><p>The ROI’s to use. If None, this function will extract averages for all
+ROIs</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>mean_intensity</strong> : array</p>
+<blockquote>
+<div><p>The mean intensity of each ROI for all <cite>images</cite>
+Dimensions:</p>
+<blockquote>
+<div><ul class="simple">
+<li>len(mean_intensity) == len(index)</li>
+<li>len(mean_intensity[0]) == len(images)</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+<p><strong>index</strong> : list</p>
+<blockquote class="last">
+<div><p>The labels for each element of the <cite>mean_intensity</cite> list</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.rectangles">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">rectangles</code><span class="sig-paren">(</span><em>coords</em>, <em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.rectangles" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function wil provide the indices array for rectangle region of
+interests.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>coords</strong> : iterable</p>
+<blockquote>
+<div><p>coordinates of the upper-left corner and width and height of each
+rectangle: e.g., [(x, y, w, h), (x, y, w, h)]</p>
+</div></blockquote>
+<p><strong>shape</strong> : tuple</p>
+<blockquote>
+<div><p>Image shape which is used to determine the maximum extent of output
+pixel coordinates. Order is (rr, cc).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>label_array</strong> : array</p>
+<blockquote class="last">
+<div><p>Elements not inside any ROI are zero; elements inside each
+ROI are 1, 2, 3, corresponding to the order they are specified
+in coords. Order is (rr, cc).</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.ring_edges">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">ring_edges</code><span class="sig-paren">(</span><em>inner_radius</em>, <em>width</em>, <em>spacing=0</em>, <em>num_rings=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.ring_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate the inner and outer radius of a set of rings.</p>
+<p>The number of rings, their widths, and any spacing between rings can be
+specified. They can be uniform or varied.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>inner_radius</strong> : float</p>
+<blockquote>
+<div><p>inner radius of the inner-most ring</p>
+</div></blockquote>
+<p><strong>width</strong> : float or list of floats</p>
+<blockquote>
+<div><p>ring thickness
+If a float, all rings will have the same thickness.</p>
+</div></blockquote>
+<p><strong>spacing</strong> : float or list of floats, optional</p>
+<blockquote>
+<div><p>margin between rings, 0 by default
+If a float, all rings will have the same spacing. If a list,
+the length of the list must be one less than the number of
+rings.</p>
+</div></blockquote>
+<p><strong>num_rings</strong> : int, optional</p>
+<blockquote>
+<div><p>number of rings
+Required if width and spacing are not lists and number
+cannot thereby be inferred. If it is given and can also be
+inferred, input is checked for consistency.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>edges</strong> : array</p>
+<blockquote class="last">
+<div><p>inner and outer radius for each ring</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.rings">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">rings</code><span class="sig-paren">(</span><em>edges</em>, <em>center</em>, <em>shape</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.rings" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw annual (ring-shaped) shaped regions of interest.</p>
+<p>Each ring will be labeled with an integer. Regions outside any ring will
+be filled with zeros.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>edges: list</strong></p>
+<blockquote>
+<div><p>giving the inner and outer radius of each ring
+e.g., [(1, 2), (11, 12), (21, 22)]</p>
+</div></blockquote>
+<p><strong>center: tuple</strong></p>
+<blockquote>
+<div><p>point in image where r=0; may be a float giving subpixel precision.
+Order is (rr, cc).</p>
+</div></blockquote>
+<p><strong>shape: tuple</strong></p>
+<blockquote>
+<div><p>Image shape which is used to determine the maximum extent of output
+pixel coordinates. Order is (rr, cc).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>label_array</strong> : array</p>
+<blockquote class="last">
+<div><p>Elements not inside any ROI are zero; elements inside each
+ROI are 1, 2, 3, corresponding to the order they are specified
+in edges.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.roi_max_counts">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">roi_max_counts</code><span class="sig-paren">(</span><em>images_sets</em>, <em>label_array</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.roi_max_counts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the brightest pixel in any ROI in any image in the image set.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>images_sets</strong> : array</p>
+<blockquote>
+<div><p>iterable of 4D arrays
+shapes is: (len(images_sets), )</p>
+</div></blockquote>
+<p><strong>label_array</strong> : array</p>
+<blockquote>
+<div><p>labeled array; 0 is background.
+Each ROI is represented by a distinct label (i.e., integer).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>max_counts</strong> : int</p>
+<blockquote class="last">
+<div><p>maximum pixel counts</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.roi_pixel_values">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">roi_pixel_values</code><span class="sig-paren">(</span><em>image</em>, <em>labels</em>, <em>index=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.roi_pixel_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will provide intensities of the ROI’s of the labeled array
+according to the pixel list
+eg: intensities of the rings of the labeled array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>image</strong> : array</p>
+<blockquote>
+<div><p>image data dimensions are: (rr, cc)</p>
+</div></blockquote>
+<p><strong>labels</strong> : array</p>
+<blockquote>
+<div><p>labeled array; 0 is background.
+Each ROI is represented by a distinct label (i.e., integer).</p>
+</div></blockquote>
+<p><strong>index_list</strong> : list, optional</p>
+<blockquote>
+<div><p>labels list
+eg: 5 ROI’s
+index = [1, 2, 3, 4, 5]</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>roi_pix</strong> : list</p>
+<blockquote class="last">
+<div><p>intensities of the ROI’s of the labeled array according
+to the pixel list</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.roi.segmented_rings">
+<code class="descclassname">skbeam.core.roi.</code><code class="descname">segmented_rings</code><span class="sig-paren">(</span><em>edges</em>, <em>segments</em>, <em>center</em>, <em>shape</em>, <em>offset_angle=0</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.roi.segmented_rings" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>edges</strong> : array</p>
+<blockquote>
+<div><p>inner and outer radius for each ring</p>
+</div></blockquote>
+<p><strong>segments</strong> : int or list</p>
+<blockquote>
+<div><p>number of pie slices or list of angles in radians
+That is, 8 produces eight equal-sized angular segments,
+whereas a list can be used to produce segments of unequal size.</p>
+</div></blockquote>
+<p><strong>center</strong> : tuple</p>
+<blockquote>
+<div><p>point in image where r=0; may be a float giving subpixel precision.
+Order is (rr, cc).</p>
+</div></blockquote>
+<p><strong>shape: tuple</strong></p>
+<blockquote>
+<div><p>Image shape which is used to determine the maximum extent of output
+pixel coordinates. Order is (rr, cc).</p>
+</div></blockquote>
+<p><strong>angle_offset</strong> : float or array, optional</p>
+<blockquote>
+<div><p>offset in radians from offset_angle=0 along the positive X axis</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>label_array</strong> : array</p>
+<blockquote class="last">
+<div><p>Elements not inside any ROI are zero; elements inside each
+ROI are 1, 2, 3, corresponding to the order they are specified
+in edges and segments</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><a class="reference internal" href="#skbeam.core.roi.ring_edges" title="skbeam.core.roi.ring_edges"><code class="xref py py-obj docutils literal"><span class="pre">ring_edges</span></code></a></dt>
+<dd>Calculate the inner and outer radius of a set of rings.</dd>
+</dl>
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+  <li><a href="index.html">Core API</a><ul>
+      <li>Previous: <a href="recip.html" title="previous chapter"><code class="docutils literal"><span class="pre">core.recip</span></code> Module</a></li>
+      <li>Next: <a href="spectroscopy.html" title="next chapter"><code class="docutils literal"><span class="pre">core.spectroscopy</span></code> Module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/core/roi.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/core/roi.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

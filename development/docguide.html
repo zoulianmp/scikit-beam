@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Writing Documentation &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Scikit-beam Docstring Rules" href="docrules.html" />
+    <link rel="prev" title="Emacs setup for following coding guidelines" href="codeguide_emacs.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="writing-documentation">
+<span id="documentation-guidelines"></span><h1>Writing Documentation<a class="headerlink" href="#writing-documentation" title="Permalink to this headline">¶</a></h1>
+<p>High-quality, consistent documentation for the science code is one of
+the major goals of the Scikit-beam project.  Hence, we describe our
+documentation procedures and rules here.  For the scikit-beam core
+project we try to keep to these as closely as possible, while the
+standards for affiliated packages are somewhat looser.  (These
+procedures and guidelines are still recommended for affiliated
+packages, as they encourage useful documentation, a characteristic
+often lacking in scientific software.)</p>
+<div class="section" id="building-the-documentation-from-source">
+<h2>Building the Documentation from source<a class="headerlink" href="#building-the-documentation-from-source" title="Permalink to this headline">¶</a></h2>
+<p>For information about building the documentation from source, see
+the <a class="reference internal" href="../install.html#builddocs"><span class="std std-ref">Building documentation</span></a> section in the installation instructions.</p>
+</div>
+<div class="section" id="scikit-beam-documentation-rules-and-guidelines">
+<h2>Scikit-beam Documentation Rules and Guidelines<a class="headerlink" href="#scikit-beam-documentation-rules-and-guidelines" title="Permalink to this headline">¶</a></h2>
+<p>This section describes the standards for documentation format affiliated
+packages that must follow for consideration of integration into the core
+module, as well as the standard Scikit-beam docstring format.</p>
+<ul class="simple">
+<li>All documentation should be written use the Sphinx documentation tool.</li>
+<li>The template package will provide a recommended general structure for
+documentation. [TODO]</li>
+<li>Docstrings must be provided for all public classes, methods, and functions.</li>
+<li>Docstrings will be incorporated into the documentation using a
+version of numpydoc included with Scikit-beam, and should follow the
+<a class="reference internal" href="docrules.html"><span class="doc">Scikit-beam Docstring Rules</span></a>. [TODO do we want to vendor numpydoc or use napolean?]</li>
+<li>Examples and/or tutorials are strongly encouraged for typical use-cases of a
+particular module or class.</li>
+<li>Any external package dependencies aside from <a class="reference external" href="http://numpy.scipy.org/">NumPy</a>, <a class="reference external" href="http://www.scipy.org">SciPy</a>, or <a class="reference external" href="http://matplotlib.sourceforge.net/">Matplotlib</a>
+must be explicitly mentioned in the documentation.</li>
+<li>Configuration options using the <code class="xref py py-mod docutils literal"><span class="pre">scikit-beam.config</span></code> mechanisms must be
+explicitly mentioned in the documentation.  [TODO do we want to keep config]</li>
+</ul>
+<p>The details of the docstring format are described on a separate page:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="docrules.html">Scikit-beam Docstring Rules</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#docstring-standard">Docstring Standard</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#sections">Sections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#documenting-classes">Documenting classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="docrules.html#class-docstring">Class docstring</a></li>
+<li class="toctree-l3"><a class="reference internal" href="docrules.html#method-docstrings">Method docstrings</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#documenting-class-instances">Documenting class instances</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#documenting-generators">Documenting generators</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#documenting-constants">Documenting constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#documenting-modules">Documenting modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#other-points-to-keep-in-mind">Other points to keep in mind</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#common-rest-concepts">Common reST concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="docrules.html#conclusion">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="numpydoc-extension">
+<h3>numpydoc Extension<a class="headerlink" href="#numpydoc-extension" title="Permalink to this headline">¶</a></h3>
+<p>This extension (and some related extensions) are a port of the
+<a class="reference external" href="http://pypi.python.org/pypi/numpydoc/0.3.1">numpydoc</a> extension
+written by the <a class="reference external" href="http://numpy.scipy.org/">NumPy</a> and <a class="reference external" href="http://www.scipy.org">SciPy</a>, projects, with some tweaks for
+Scikit-beam.  Its main purposes is to reprocess docstrings from code into
+a form sphinx understands. Generally, there’s no need to interact with
+it directly, as docstrings following the <a class="reference internal" href="docrules.html"><span class="doc">Scikit-beam Docstring Rules</span></a> will be
+processed automatically.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Writing Documentation</a><ul>
+<li><a class="reference internal" href="#building-the-documentation-from-source">Building the Documentation from source</a></li>
+<li><a class="reference internal" href="#scikit-beam-documentation-rules-and-guidelines">Scikit-beam Documentation Rules and Guidelines</a><ul>
+<li><a class="reference internal" href="#numpydoc-extension">numpydoc Extension</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="codeguide_emacs.html" title="previous chapter">Emacs setup for following coding guidelines</a></li>
+      <li>Next: <a href="docrules.html" title="next chapter">Scikit-beam Docstring Rules</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/development/docguide.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../_sources/development/docguide.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

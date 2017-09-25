@@ -1,0 +1,351 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.feature Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Fitting API" href="fitting/index.html" />
+    <link rel="prev" title="core.dpc Module" href="dpc.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.core.feature">
+<span id="core-feature-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">core.feature</span></code> Module<a class="headerlink" href="#module-skbeam.core.feature" title="Permalink to this headline">¶</a></h1>
+<p>This module contains code for extracting features from data</p>
+<dl class="exception">
+<dt id="skbeam.core.feature.PeakRejection">
+<em class="property">exception </em><code class="descclassname">skbeam.core.feature.</code><code class="descname">PeakRejection</code><a class="headerlink" href="#skbeam.core.feature.PeakRejection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#Exception" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">Exception</span></code></a></p>
+<p>Custom exception class to indicate that the refine function rejected
+the candidate peak.</p>
+<p>This uses the exception handling framework in a method akin to
+<cite>StopIteration</cite> to indicate that there will be no return value.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.feature.filter_n_largest">
+<code class="descclassname">skbeam.core.feature.</code><code class="descname">filter_n_largest</code><span class="sig-paren">(</span><em>y</em>, <em>cands</em>, <em>N</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.feature.filter_n_largest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters the N largest candidate peaks</p>
+<p>Return a maximum of N largest candidates.  If N &gt; len(cands) then
+all of the cands will be returned sorted, else the indices
+of the N largest peaks will be returned in descending order.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y</strong> : array</p>
+<blockquote>
+<div><p>Independent variable</p>
+</div></blockquote>
+<p><strong>cands</strong> : array</p>
+<blockquote>
+<div><p>An array containing the indices of candidate peaks</p>
+</div></blockquote>
+<p><strong>N</strong> : int</p>
+<blockquote>
+<div><p>The maximum number of peaks to return, sorted by size.
+Must be positive</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cands</strong> : array</p>
+<blockquote class="last">
+<div><p>An array of the indices of up to the N largest candidates</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.feature.filter_peak_height">
+<code class="descclassname">skbeam.core.feature.</code><code class="descname">filter_peak_height</code><span class="sig-paren">(</span><em>y</em>, <em>cands</em>, <em>thresh</em>, <em>window=5</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.feature.filter_peak_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter to remove candidate that are too small.  This
+is implemented by looking at the relative height (max - min)
+of the peak in a window around the candidate peak.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y</strong> : array</p>
+<blockquote>
+<div><p>Independent variable</p>
+</div></blockquote>
+<p><strong>cands</strong> : array</p>
+<blockquote>
+<div><p>An array containing the indices of candidate peaks</p>
+</div></blockquote>
+<p><strong>thresh</strong> : int</p>
+<blockquote>
+<div><p>The minimum peak-to-peak size of the candidate peak to be accepted</p>
+</div></blockquote>
+<p><strong>window</strong> : int, optional</p>
+<blockquote>
+<div><p>The size of the window around the peak to consider</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>cands</strong> : array</p>
+<blockquote class="last">
+<div><p>An array of the indices which pass the filter</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.feature.peak_refinement">
+<code class="descclassname">skbeam.core.feature.</code><code class="descname">peak_refinement</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>cands</em>, <em>window</em>, <em>refine_function</em>, <em>refine_args=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.feature.peak_refinement" title="Permalink to this definition">¶</a></dt>
+<dd><p>Refine candidate locations</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>The independent variable, does not need to be evenly spaced.</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>The dependent variable.  Must correspond 1:1 with the values in <cite>x</cite></p>
+</div></blockquote>
+<p><strong>cands</strong> : array</p>
+<blockquote>
+<div><p>Array of the indices in <cite>x</cite> (and <cite>y</cite>) for the candidate peaks.</p>
+</div></blockquote>
+<p><strong>refine_function</strong> : function</p>
+<blockquote>
+<div><p>A function which takes a section of data with a peak in it and returns
+the location and height of the peak to sub-sample accuracy.  Additional
+parameters can be passed through via the refine_args kwarg.
+The function signature must be:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">center</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">refine_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This function may raise <cite>PeakRejection</cite> to indicate no suitable
+peak was found</p>
+</div></blockquote>
+<p><strong>window</strong> : int</p>
+<blockquote>
+<div><p>How many samples to extract on either side of the
+candidate locations are passed to the refine function.  The
+window will be truncated near the boundaries.  The length of the
+data passed to the refine function will be (2 * window + 1).</p>
+</div></blockquote>
+<p><strong>refine_args</strong> : dict, optional</p>
+<blockquote>
+<div><p>The passed to the refine_function</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>peak_locations</strong> : array</p>
+<blockquote>
+<div><p>The locations of the peaks</p>
+</div></blockquote>
+<p><strong>peak_heights</strong> : array</p>
+<blockquote class="last">
+<div><p>The heights of the peaks</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Examples</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">512</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="mf">150.55</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">((</span><span class="n">x</span> <span class="o">-</span> <span class="mf">450.75</span><span class="p">)</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cands</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">argrelmax</span><span class="p">(</span><span class="n">tt</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">peak_refinement</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tt</span><span class="p">,</span> <span class="n">cands</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refine_quadratic</span><span class="p">))</span>
+<span class="go">(array([ 150.62286432,  450.7909412 ]), array([ 0.96435832,  0.96491501]))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">peak_refinement</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">tt</span><span class="p">,</span> <span class="n">cands</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="n">refine_log_quadratic</span><span class="p">))</span>
+<span class="go">(array([ 150.55,  450.75]), array([ 1.,  1.]))</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.feature.refine_log_quadratic">
+<code class="descclassname">skbeam.core.feature.</code><code class="descname">refine_log_quadratic</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>Rval_thresh=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.feature.refine_log_quadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to refine the peaks by fitting a quadratic to the log of
+the y-data.  This is a linear approximation of fitting a Gaussian.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>Independent variable</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>Dependent variable</p>
+</div></blockquote>
+<p><strong>Rval_thresh</strong> : float, optional</p>
+<blockquote>
+<div><p>Threshold for R^2 value of fit,  If the computed R^2 is worse than
+this threshold PeakRejection will be raised</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> : float</p>
+<blockquote>
+<div><p>Refined estimate for center</p>
+</div></blockquote>
+<p><strong>height</strong> : float</p>
+<blockquote>
+<div><p>Refined estimate for height</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>PeakRejection</strong></p>
+<blockquote class="last">
+<div><p>Raised to indicate that no suitable peak was found in the
+interval</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.feature.refine_quadratic">
+<code class="descclassname">skbeam.core.feature.</code><code class="descname">refine_quadratic</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>Rval_thresh=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.feature.refine_quadratic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Attempts to refine the peaks by fitting to
+a quadratic function.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>Independent variable</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>Dependent variable</p>
+</div></blockquote>
+<p><strong>Rval_thresh</strong> : float, optional</p>
+<blockquote>
+<div><p>Threshold for R^2 value of fit,  If the computed R^2 is worse than
+this threshold PeakRejection will be raised</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>center</strong> : float</p>
+<blockquote>
+<div><p>Refined estimate for center</p>
+</div></blockquote>
+<p><strong>height</strong> : float</p>
+<blockquote>
+<div><p>Refined estimate for height</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>PeakRejection</strong></p>
+<blockquote class="last">
+<div><p>Raised to indicate that no suitable peak was found in the
+interval</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+  <li><a href="index.html">Core API</a><ul>
+      <li>Previous: <a href="dpc.html" title="previous chapter"><code class="docutils literal"><span class="pre">core.dpc</span></code> Module</a></li>
+      <li>Next: <a href="fitting/index.html" title="next chapter">Fitting API</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/core/feature.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/core/feature.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

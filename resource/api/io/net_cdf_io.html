@@ -1,0 +1,170 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>io.net_cdf_io Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="io.save_powder_output Module" href="save_powder_output.html" />
+    <link rel="prev" title="io.gsas_file_reader Module" href="gsas_file_reader.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.io.net_cdf_io">
+<span id="io-net-cdf-io-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">io.net_cdf_io</span></code> Module<a class="headerlink" href="#module-skbeam.io.net_cdf_io" title="Permalink to this headline">¶</a></h1>
+<p>This module contains fileIO operations and file conversion for the image
+processing tool kit in the NSLS-II data analysis software package.
+The functions included in this module focus on reading and writing
+netCDF files. This is the file format used by Mark Rivers for
+x-ray computed microtomography data collected at Argonne National Laboratory,
+Sector 13BMD, GSECars.</p>
+<dl class="function">
+<dt id="skbeam.io.net_cdf_io.load_netCDF">
+<code class="descclassname">skbeam.io.net_cdf_io.</code><code class="descname">load_netCDF</code><span class="sig-paren">(</span><em>file_name</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.io.net_cdf_io.load_netCDF" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function loads the specified netCDF file format data set (e.g.*.volume
+APS-Sector 13 GSECARS extension) file into a numpy array for further
+analysis.</p>
+<p>Required Dependencies:</p>
+<dl class="docutils">
+<dt>netcdf4 <span class="classifier-delimiter">:</span> <span class="classifier">Python/numpy interface to the netCDF ver. 4 library</span></dt>
+<dd>Package name: netcdf4-python
+Install from: <a class="reference external" href="https://github.com/Unidata/netcdf4-python">https://github.com/Unidata/netcdf4-python</a></dd>
+</dl>
+<p>numpy</p>
+<p>Cython – optional</p>
+<dl class="docutils">
+<dt>HDF5 C library version 1.8.8 or higher</dt>
+<dd>Install from:  <a class="reference external" href="ftp://ftp.hdfgroup.org/HDF5/current/src">ftp://ftp.hdfgroup.org/HDF5/current/src</a>
+Be sure to build with ‘–enable-hl –enable-shared’.</dd>
+<dt>netCDF-4 C library</dt>
+<dd><dl class="first docutils">
+<dt>Install from:</dt>
+<dd><a class="reference external" href="ftp://ftp.unidata.ucar.edu/pub/netcdf">ftp://ftp.unidata.ucar.edu/pub/netcdf</a>. Version 4.1.1 or higher</dd>
+</dl>
+<p class="last">Be sure to build with ‘–enable-netcdf-4 –enable-shared’, and set
+CPPFLAGS=”-I $HDF5_DIR/include” and LDFLAGS=”-L $HDF5_DIR/lib”, where
+$HDF5_DIR is the directory where HDF5 was installed.
+If you want OPeNDAP support, add ‘–enable-dap’.
+If you want HDF4 SD support, add ‘–enable-hdf4’ and add the location
+of the HDF4 headers and library to CPPFLAGS and LDFLAGS.</p>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>file_name</strong> : string</p>
+<blockquote>
+<div><p>Complete path to the file to be loaded into memory</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>md_dict</strong> : dict</p>
+<blockquote>
+<div><p>Dictionary containing all metadata contained in the netCDF file.
+This metadata contains data collection, and experiment information
+as well as values and variables pertinent to the image data.</p>
+</div></blockquote>
+<p><strong>data</strong> : ndarray</p>
+<blockquote class="last">
+<div><p>ndarray containing the image data contained in the netCDF file.
+The image data is scaled using the scale factor defined in the
+netCDF metadata, if a scale factor was recorded during data
+acquisition or reconstruction. If a scale factor is not present,
+then a default value of 1.0 is used.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+  <li><a href="index.html">IO API</a><ul>
+      <li>Previous: <a href="gsas_file_reader.html" title="previous chapter"><code class="docutils literal"><span class="pre">io.gsas_file_reader</span></code> Module</a></li>
+      <li>Next: <a href="save_powder_output.html" title="next chapter"><code class="docutils literal"><span class="pre">io.save_powder_output</span></code> Module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/io/net_cdf_io.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/io/net_cdf_io.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

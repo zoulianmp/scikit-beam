@@ -1,0 +1,121 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Supported versions of Python &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Python warnings system" href="warnings.html" />
+    <link rel="prev" title="Changes to bin_1D function" href="api_changes/2015-12-01-utils.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="supported-versions-of-python">
+<h1>Supported versions of Python<a class="headerlink" href="#supported-versions-of-python" title="Permalink to this headline">¶</a></h1>
+<p>The primary development target of the <code class="docutils literal"><span class="pre">scikit-beam</span></code> is python 3.5+.
+Affiliated packages are encouraged, but not rquired to support legacy
+python when practical.  The core library will support 2.7 as long as
+the upstream scientific libraries do.</p>
+<p>Upstream (CPython) has made in very clear that python2 will not be
+supported going forward and that <a class="reference external" href="https://www.python.org/dev/peps/pep-0404/">no new features will be added to
+python 2</a> .  The EOL for
+python 2.7 was already extended from <a class="reference external" href="http://legacy.python.org/dev/peps/pep-0373/">2015 to 2020</a> to fix <a class="reference external" href="https://www.python.org/dev/peps/pep-0466/">critical
+network security issues</a>
+for entities that have large network facing code bases they can not
+quickly migrate.</p>
+<p>All of the core libraries of the scientific stack fully support python
+3.x and support for python 2.6 has been dropped for matplotlib and
+pandas and is scheduled to be dropped by numpy.  The discussion in the
+community is not ‘if’ to drop legacy python support, but ‘when’ and
+‘how’.</p>
+<p>Moving to python 3.5+ will greatly simplify supporting c-extensions on
+windows.  Currently, to compile c-extensions from legacy python
+requires using an unsupported version of visual studio (which was
+re-released as a ‘community edition’ for the sole reason of supporting
+python).  Due to changes in the MS c runtime c-extensions will always
+be able to be compiled with the current version of visual studio.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api_changes/2015-12-01-utils.html" title="previous chapter">Changes to bin_1D function</a></li>
+      <li>Next: <a href="warnings.html" title="next chapter">Python warnings system</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/python_versions.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="_sources/python_versions.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

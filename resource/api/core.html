@@ -1,0 +1,422 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core subpackge &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="core.mask Module" href="core/mask.html" />
+    <link rel="prev" title="io.save_powder_output Module" href="io/save_powder_output.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="core-subpackge">
+<h1><code class="xref py py-mod docutils literal"><span class="pre">core</span></code> subpackge<a class="headerlink" href="#core-subpackge" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="scientific-algorithms">
+<span id="user-docs"></span><h2>Scientific Algorithms<a class="headerlink" href="#scientific-algorithms" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/skbeam.core.cdi.cdi_recon.html#skbeam.core.cdi.cdi_recon" title="skbeam.core.cdi.cdi_recon"><code class="xref py py-obj docutils literal"><span class="pre">cdi.cdi_recon</span></code></a>(diffracted_pattern,&nbsp;…[,&nbsp;…])</td>
+<td>Run reconstruction with difference map algorithm.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/correlation.html#skbeam.core.correlation.multi_tau_auto_corr" title="skbeam.core.correlation.multi_tau_auto_corr"><code class="xref py py-obj docutils literal"><span class="pre">correlation.multi_tau_auto_corr</span></code></a>(num_levels,&nbsp;…)</td>
+<td>Wraps generator implementation of multi-tau</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/dpc.html#skbeam.core.dpc.recon" title="skbeam.core.dpc.recon"><code class="xref py py-obj docutils literal"><span class="pre">dpc.recon</span></code></a>(gx,&nbsp;gy,&nbsp;scan_xstep,&nbsp;scan_ystep[,&nbsp;…])</td>
+<td>Reconstruct the final phase image.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/dpc.html#skbeam.core.dpc.dpc_runner" title="skbeam.core.dpc.dpc_runner"><code class="xref py py-obj docutils literal"><span class="pre">dpc.dpc_runner</span></code></a>(ref,&nbsp;image_sequence,&nbsp;…[,&nbsp;…])</td>
+<td>Wraps <cite>lazy_dpc</cite></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/recip.html#skbeam.core.recip.process_to_q" title="skbeam.core.recip.process_to_q"><code class="xref py py-obj docutils literal"><span class="pre">recip.process_to_q</span></code></a>(setting_angles,&nbsp;…[,&nbsp;…])</td>
+<td>This will compute the hkl values for all pixels in a shape specified by detector_size.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="helper-classes">
+<h2>Helper Classes<a class="headerlink" href="#helper-classes" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="dictionary-like-classes">
+<h3>Dictionary-like classes<a class="headerlink" href="#dictionary-like-classes" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.MD_dict" title="skbeam.core.utils.MD_dict"><code class="xref py py-obj docutils literal"><span class="pre">utils.MD_dict</span></code></a>([md_dict])</td>
+<td>A class to make dealing with the meta-data scheme for DataExchange easier</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.verbosedict" title="skbeam.core.utils.verbosedict"><code class="xref py py-obj docutils literal"><span class="pre">utils.verbosedict</span></code></a></td>
+<td>A sub-class of dict which raises more verbose errors if a key is not found.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.RCParamDict" title="skbeam.core.utils.RCParamDict"><code class="xref py py-obj docutils literal"><span class="pre">utils.RCParamDict</span></code></a>()</td>
+<td>A class to make dealing with storing default values easier.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="image-warping-functions">
+<h2>Image warping functions<a class="headerlink" href="#image-warping-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.img_to_relative_xyi" title="skbeam.core.utils.img_to_relative_xyi"><code class="xref py py-obj docutils literal"><span class="pre">utils.img_to_relative_xyi</span></code></a>(img,&nbsp;cx,&nbsp;cy[,&nbsp;…])</td>
+<td>Convert the 2D image to a list of x y I coordinates where</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.radial_grid" title="skbeam.core.utils.radial_grid"><code class="xref py py-obj docutils literal"><span class="pre">utils.radial_grid</span></code></a>(center,&nbsp;shape[,&nbsp;pixel_size])</td>
+<td>Convert a cartesian grid (x,y) to the radius relative to some center</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.angle_grid" title="skbeam.core.utils.angle_grid"><code class="xref py py-obj docutils literal"><span class="pre">utils.angle_grid</span></code></a>(center,&nbsp;shape[,&nbsp;pixel_size])</td>
+<td>Make a grid of angular positions.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="peak">
+<h2>Peak<a class="headerlink" href="#peak" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="peak-fitting">
+<h3>Peak fitting<a class="headerlink" href="#peak-fitting" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/feature.html#skbeam.core.feature.peak_refinement" title="skbeam.core.feature.peak_refinement"><code class="xref py py-obj docutils literal"><span class="pre">feature.peak_refinement</span></code></a>(x,&nbsp;y,&nbsp;cands,&nbsp;window,&nbsp;…)</td>
+<td>Refine candidate locations</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/feature.html#skbeam.core.feature.refine_quadratic" title="skbeam.core.feature.refine_quadratic"><code class="xref py py-obj docutils literal"><span class="pre">feature.refine_quadratic</span></code></a>(x,&nbsp;y[,&nbsp;Rval_thresh])</td>
+<td>Attempts to refine the peaks by fitting to a quadratic function.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/feature.html#skbeam.core.feature.refine_log_quadratic" title="skbeam.core.feature.refine_log_quadratic"><code class="xref py py-obj docutils literal"><span class="pre">feature.refine_log_quadratic</span></code></a>(x,&nbsp;y[,&nbsp;Rval_thresh])</td>
+<td>Attempts to refine the peaks by fitting a quadratic to the log of the y-data.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/feature.html#skbeam.core.feature.filter_n_largest" title="skbeam.core.feature.filter_n_largest"><code class="xref py py-obj docutils literal"><span class="pre">feature.filter_n_largest</span></code></a>(y,&nbsp;cands,&nbsp;N)</td>
+<td>Filters the N largest candidate peaks</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/feature.html#skbeam.core.feature.filter_peak_height" title="skbeam.core.feature.filter_peak_height"><code class="xref py py-obj docutils literal"><span class="pre">feature.filter_peak_height</span></code></a>(y,&nbsp;cands,&nbsp;thresh)</td>
+<td>Filter to remove candidate that are too small.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="peak-finding">
+<h3>Peak finding<a class="headerlink" href="#peak-finding" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/image.html#skbeam.core.image.find_ring_center_acorr_1D" title="skbeam.core.image.find_ring_center_acorr_1D"><code class="xref py py-obj docutils literal"><span class="pre">image.find_ring_center_acorr_1D</span></code></a>(input_image)</td>
+<td>Find the pixel-resolution center of a set of concentric rings.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/spectroscopy.html#skbeam.core.spectroscopy.find_largest_peak" title="skbeam.core.spectroscopy.find_largest_peak"><code class="xref py py-obj docutils literal"><span class="pre">spectroscopy.find_largest_peak</span></code></a>(x,&nbsp;y[,&nbsp;window])</td>
+<td>Finds and estimates the location, width, and height of the largest peak.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="image-pre-processing">
+<h2>Image pre-processing<a class="headerlink" href="#image-pre-processing" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.subtract_reference_images" title="skbeam.core.utils.subtract_reference_images"><code class="xref py py-obj docutils literal"><span class="pre">utils.subtract_reference_images</span></code></a>(imgs,&nbsp;…)</td>
+<td>Function to subtract a series of measured images from background/dark current/reference images.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="histograms-and-integration">
+<h2>Histograms and Integration<a class="headerlink" href="#histograms-and-integration" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="binning">
+<h3>Binning<a class="headerlink" href="#binning" title="Permalink to this headline">¶</a></h3>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.bin_1D" title="skbeam.core.utils.bin_1D"><code class="xref py py-obj docutils literal"><span class="pre">utils.bin_1D</span></code></a>(x,&nbsp;y[,&nbsp;nx,&nbsp;min_x,&nbsp;max_x])</td>
+<td>Bin the values in y based on their x-coordinates</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.wedge_integration" title="skbeam.core.utils.wedge_integration"><code class="xref py py-obj docutils literal"><span class="pre">utils.wedge_integration</span></code></a>(src_data,&nbsp;center,&nbsp;…)</td>
+<td>Implementation of caking.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.grid3d" title="skbeam.core.utils.grid3d"><code class="xref py py-obj docutils literal"><span class="pre">utils.grid3d</span></code></a>(q,&nbsp;img_stack[,&nbsp;nx,&nbsp;ny,&nbsp;nz,&nbsp;…])</td>
+<td>Grid irregularly spaced data points onto a regular grid via histogramming</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section" id="helper-functions">
+<h2>Helper functions<a class="headerlink" href="#helper-functions" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.pairwise" title="skbeam.core.utils.pairwise"><code class="xref py py-obj docutils literal"><span class="pre">utils.pairwise</span></code></a>(iterable)</td>
+<td>s -&gt; (s0,s1), (s1,s2), (s2, s3), …</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.geometric_series" title="skbeam.core.utils.geometric_series"><code class="xref py py-obj docutils literal"><span class="pre">utils.geometric_series</span></code></a>(common_ratio,&nbsp;…[,&nbsp;…])</td>
+<td>This will provide the geometric series for the integration.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.multi_tau_lags" title="skbeam.core.utils.multi_tau_lags"><code class="xref py py-obj docutils literal"><span class="pre">utils.multi_tau_lags</span></code></a>(multitau_levels,&nbsp;…)</td>
+<td>Standard multiple-tau algorithm for finding the lag times (delay times).</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.bin_edges" title="skbeam.core.utils.bin_edges"><code class="xref py py-obj docutils literal"><span class="pre">utils.bin_edges</span></code></a>([range_min,&nbsp;range_max,&nbsp;…])</td>
+<td>Generate bin edges.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.bin_edges_to_centers" title="skbeam.core.utils.bin_edges_to_centers"><code class="xref py py-obj docutils literal"><span class="pre">utils.bin_edges_to_centers</span></code></a>(input_edges)</td>
+<td>Helper function for turning a array of bin edges into</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="generating-rois">
+<h2>Generating ROIs<a class="headerlink" href="#generating-rois" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.kymograph" title="skbeam.core.roi.kymograph"><code class="xref py py-obj docutils literal"><span class="pre">roi.kymograph</span></code></a>(images,&nbsp;labels,&nbsp;num)</td>
+<td>This function will provide data for graphical representation of pixels variation over time for required ROI.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.circular_average" title="skbeam.core.roi.circular_average"><code class="xref py py-obj docutils literal"><span class="pre">roi.circular_average</span></code></a>(image,&nbsp;calibrated_center)</td>
+<td>Circular average of the the image data</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.mean_intensity" title="skbeam.core.roi.mean_intensity"><code class="xref py py-obj docutils literal"><span class="pre">roi.mean_intensity</span></code></a>(images,&nbsp;labeled_array[,&nbsp;…])</td>
+<td>Compute the mean intensity for each ROI in the image list</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.roi_pixel_values" title="skbeam.core.roi.roi_pixel_values"><code class="xref py py-obj docutils literal"><span class="pre">roi.roi_pixel_values</span></code></a>(image,&nbsp;labels[,&nbsp;index])</td>
+<td>This will provide intensities of the ROI’s of the labeled array</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.roi_max_counts" title="skbeam.core.roi.roi_max_counts"><code class="xref py py-obj docutils literal"><span class="pre">roi.roi_max_counts</span></code></a>(images_sets,&nbsp;label_array)</td>
+<td>Return the brightest pixel in any ROI in any image in the image set.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.segmented_rings" title="skbeam.core.roi.segmented_rings"><code class="xref py py-obj docutils literal"><span class="pre">roi.segmented_rings</span></code></a>(edges,&nbsp;segments,&nbsp;center,&nbsp;…)</td>
+<td><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.ring_edges" title="skbeam.core.roi.ring_edges"><code class="xref py py-obj docutils literal"><span class="pre">roi.ring_edges</span></code></a>(inner_radius,&nbsp;width[,&nbsp;…])</td>
+<td>Calculate the inner and outer radius of a set of rings.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.rings" title="skbeam.core.roi.rings"><code class="xref py py-obj docutils literal"><span class="pre">roi.rings</span></code></a>(edges,&nbsp;center,&nbsp;shape)</td>
+<td>Draw annual (ring-shaped) shaped regions of interest.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/roi.html#skbeam.core.roi.rectangles" title="skbeam.core.roi.rectangles"><code class="xref py py-obj docutils literal"><span class="pre">roi.rectangles</span></code></a>(coords,&nbsp;shape)</td>
+<td>This function wil provide the indices array for rectangle region of interests.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="physical-relations">
+<h2>Physical relations<a class="headerlink" href="#physical-relations" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.q_to_d" title="skbeam.core.utils.q_to_d"><code class="xref py py-obj docutils literal"><span class="pre">utils.q_to_d</span></code></a>(q)</td>
+<td>Helper function to convert <span class="math">\(d\)</span> to <span class="math">\(q\)</span>.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.d_to_q" title="skbeam.core.utils.d_to_q"><code class="xref py py-obj docutils literal"><span class="pre">utils.d_to_q</span></code></a>(d)</td>
+<td>Helper function to convert <span class="math">\(d\)</span> to <span class="math">\(q\)</span>.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.q_to_twotheta" title="skbeam.core.utils.q_to_twotheta"><code class="xref py py-obj docutils literal"><span class="pre">utils.q_to_twotheta</span></code></a>(q,&nbsp;wavelength)</td>
+<td>Helper function to convert q to two-theta.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.twotheta_to_q" title="skbeam.core.utils.twotheta_to_q"><code class="xref py py-obj docutils literal"><span class="pre">utils.twotheta_to_q</span></code></a>(two_theta,&nbsp;wavelength)</td>
+<td>Helper function to convert two-theta to q</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/utils.html#skbeam.core.utils.radius_to_twotheta" title="skbeam.core.utils.radius_to_twotheta"><code class="xref py py-obj docutils literal"><span class="pre">utils.radius_to_twotheta</span></code></a>(dist_sample,&nbsp;radius)</td>
+<td>Converts radius from the calibrated center to scattering angle (2:math:<cite>2theta</cite>) with known detector to sample distance.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/recip.html#skbeam.core.recip.hkl_to_q" title="skbeam.core.recip.hkl_to_q"><code class="xref py py-obj docutils literal"><span class="pre">recip.hkl_to_q</span></code></a>(hkl_arr)</td>
+<td>This module compute the reciprocal space (q) values from known HKL array</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="core/recip.html#skbeam.core.recip.calibrated_pixels_to_q" title="skbeam.core.recip.calibrated_pixels_to_q"><code class="xref py py-obj docutils literal"><span class="pre">recip.calibrated_pixels_to_q</span></code></a>(detector_size,&nbsp;…)</td>
+<td>For a given detector and pyfai calibrated geometry give back the q value for each pixel in the detector.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="boolean-logic">
+<h2>Boolean Logic<a class="headerlink" href="#boolean-logic" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">arithmetic.logical_nand</span></code>(x1,&nbsp;x2[,&nbsp;out])</td>
+<td>Computes the truth value of NOT (x1 AND x2) element wise.</td>
+</tr>
+<tr class="row-even"><td><code class="xref py py-obj docutils literal"><span class="pre">arithmetic.logical_nor</span></code>(x1,&nbsp;x2[,&nbsp;out])</td>
+<td>Compute truth value of NOT (x1 OR x2)) element wise.</td>
+</tr>
+<tr class="row-odd"><td><code class="xref py py-obj docutils literal"><span class="pre">arithmetic.logical_sub</span></code>(x1,&nbsp;x2[,&nbsp;out])</td>
+<td>Compute truth value of x1 AND (NOT (x1 AND x2)) element wise.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="calibration">
+<h2>Calibration<a class="headerlink" href="#calibration" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="core/_as_gen/skbeam.core.calibration.estimate_d_blind.html#skbeam.core.calibration.estimate_d_blind" title="skbeam.core.calibration.estimate_d_blind"><code class="xref py py-obj docutils literal"><span class="pre">calibration.estimate_d_blind</span></code></a>(name,&nbsp;…)</td>
+<td>Estimate the sample-detector distance</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="core/_as_gen/skbeam.core.calibration.refine_center.html#skbeam.core.calibration.refine_center" title="skbeam.core.calibration.refine_center"><code class="xref py py-obj docutils literal"><span class="pre">calibration.refine_center</span></code></a>(image,&nbsp;…[,&nbsp;nx,&nbsp;…])</td>
+<td>Refines the location of the center of the beam.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><code class="docutils literal"><span class="pre">core</span></code> subpackge</a><ul>
+<li><a class="reference internal" href="#scientific-algorithms">Scientific Algorithms</a></li>
+<li><a class="reference internal" href="#helper-classes">Helper Classes</a><ul>
+<li><a class="reference internal" href="#dictionary-like-classes">Dictionary-like classes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image-warping-functions">Image warping functions</a></li>
+<li><a class="reference internal" href="#peak">Peak</a><ul>
+<li><a class="reference internal" href="#peak-fitting">Peak fitting</a></li>
+<li><a class="reference internal" href="#peak-finding">Peak finding</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#image-pre-processing">Image pre-processing</a></li>
+<li><a class="reference internal" href="#histograms-and-integration">Histograms and Integration</a><ul>
+<li><a class="reference internal" href="#binning">Binning</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#helper-functions">Helper functions</a></li>
+<li><a class="reference internal" href="#generating-rois">Generating ROIs</a></li>
+<li><a class="reference internal" href="#physical-relations">Physical relations</a></li>
+<li><a class="reference internal" href="#boolean-logic">Boolean Logic</a></li>
+<li><a class="reference internal" href="#calibration">Calibration</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Complete Reference (API)</a><ul>
+      <li>Previous: <a href="io/save_powder_output.html" title="previous chapter"><code class="docutils literal"><span class="pre">io.save_powder_output</span></code> Module</a></li>
+      <li>Next: <a href="core/mask.html" title="next chapter"><code class="docutils literal"><span class="pre">core.mask</span></code> Module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/resource/api/core.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/resource/api/core.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

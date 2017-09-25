@@ -1,0 +1,935 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.utils Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="IO API" href="../io/index.html" />
+    <link rel="prev" title="skbeam.core.speckle.normalize_bin_edges" href="_as_gen/skbeam.core.speckle.normalize_bin_edges.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.core.utils">
+<span id="core-utils-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">core.utils</span></code> Module<a class="headerlink" href="#module-skbeam.core.utils" title="Permalink to this headline">¶</a></h1>
+<p>This module is for the ‘core’ data types.</p>
+<dl class="class">
+<dt id="skbeam.core.utils.MD_dict">
+<em class="property">class </em><code class="descclassname">skbeam.core.utils.</code><code class="descname">MD_dict</code><span class="sig-paren">(</span><em>md_dict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.MD_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/collections.abc.html#collections.abc.MutableMapping" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">collections.abc.MutableMapping</span></code></a></p>
+<p>A class to make dealing with the meta-data scheme for DataExchange easier</p>
+<p class="rubric">Examples</p>
+<p>Getting and setting data by path is possible</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">MD_dict</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;nested.a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;nested.b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;m&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;nested.a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="go">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;nested.a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value</span>
+<span class="go">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;nested.b&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">units</span>
+<span class="go">&#39;m&#39;</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="exception">
+<dt id="skbeam.core.utils.NotInstalledError">
+<em class="property">exception </em><code class="descclassname">skbeam.core.utils.</code><code class="descname">NotInstalledError</code><a class="headerlink" href="#skbeam.core.utils.NotInstalledError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/exceptions.html#ImportError" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">ImportError</span></code></a></p>
+<p>Custom exception that should be subclassed to handle
+specific missing libraries</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="skbeam.core.utils.RCParamDict">
+<em class="property">class </em><code class="descclassname">skbeam.core.utils.</code><code class="descname">RCParamDict</code><a class="headerlink" href="#skbeam.core.utils.RCParamDict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/collections.abc.html#collections.abc.MutableMapping" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">collections.abc.MutableMapping</span></code></a></p>
+<p>A class to make dealing with storing default values easier.</p>
+<p>RC params is a hold- over from the UNIX days where configuration
+files are ‘rc’ files.  See
+<a class="reference external" href="http://en.wikipedia.org/wiki/Configuration_file">http://en.wikipedia.org/wiki/Configuration_file</a></p>
+<p class="rubric">Examples</p>
+<p>Getting and setting data by path is possible</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span> <span class="o">=</span> <span class="n">RCParamDict</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;test&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tt</span><span class="p">[</span><span class="s1">&#39;nested.a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.angle_grid">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">angle_grid</code><span class="sig-paren">(</span><em>center</em>, <em>shape</em>, <em>pixel_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.angle_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Make a grid of angular positions.</p>
+<p>Read note for our conventions here – there be dragons!</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>center</strong> : tuple</p>
+<blockquote>
+<div><p>point in image where r=0; may be a float giving subpixel precision.
+Order is (rr, cc).</p>
+</div></blockquote>
+<p><strong>shape: tuple</strong></p>
+<blockquote>
+<div><p>Image shape which is used to determine the maximum extent of output
+pixel coordinates. Order is (rr, cc).</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>agrid</strong> : array</p>
+<blockquote class="last">
+<div><p>angular position (in radians) of each array element in range [-pi, pi]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.bin_1D">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">bin_1D</code><span class="sig-paren">(</span><em>x</em>, <em>y</em>, <em>nx=None</em>, <em>min_x=None</em>, <em>max_x=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.bin_1D" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bin the values in y based on their x-coordinates</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>position</p>
+</div></blockquote>
+<p><strong>y</strong> : array</p>
+<blockquote>
+<div><p>intensity</p>
+</div></blockquote>
+<p><strong>nx</strong> : integer, optional</p>
+<blockquote>
+<div><p>number of bins to use defaults to default bin value</p>
+</div></blockquote>
+<p><strong>min_x</strong> : float, optional</p>
+<blockquote>
+<div><p>Left edge of first bin defaults to minimum value of x</p>
+</div></blockquote>
+<p><strong>max_x</strong> : float, optional</p>
+<blockquote>
+<div><p>Right edge of last bin defaults to maximum value of x</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>edges</strong> : array</p>
+<blockquote>
+<div><p>edges of bins, length nx + 1</p>
+</div></blockquote>
+<p><strong>val</strong> : array</p>
+<blockquote>
+<div><p>sum of values in each bin, length nx</p>
+</div></blockquote>
+<p><strong>count</strong> : array</p>
+<blockquote class="last">
+<div><p>The number of counts in each bin, length nx</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.bin_edges">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">bin_edges</code><span class="sig-paren">(</span><em>range_min=None</em>, <em>range_max=None</em>, <em>nbins=None</em>, <em>step=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.bin_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generate bin edges.  The last value in the returned array is
+the right edge of the last bin, the rest of the values are the
+left edges of each bin.</p>
+<p>If <cite>range_max</cite> is specified all bin edges will be less than or
+equal to it’s value.</p>
+<p>If <cite>range_min</cite> is specified all bin edges will be greater than
+or equal to it’s value</p>
+<p>If <cite>nbins</cite> is specified then there will be than number of bins and
+the returned array will have length <cite>nbins + 1</cite> (as the right most
+edge is included)</p>
+<p>If <cite>step</cite> is specified then bin width is approximately <cite>step</cite> (It is
+not exact due to the nature of floats). The arrays generated by
+<cite>np.cumsum(np.ones(nbins) * step)</cite> and <cite>np.arange(nbins) * step</cite> are
+not identical.  This function uses the second method in all cases
+where <cite>step</cite> is specified.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If the set <code class="code docutils literal"><span class="pre">(range_min,</span> <span class="pre">range_max,</span> <span class="pre">step)</span></code> is
+given there is no guarantee that <code class="code docutils literal"><span class="pre">range_max</span> <span class="pre">-</span> <span class="pre">range_min</span></code>
+is an integer multiple of <code class="code docutils literal"><span class="pre">step</span></code>.  In this case the left
+most bin edge is <code class="code docutils literal"><span class="pre">range_min</span></code> and the right most bin edge
+is less than <code class="code docutils literal"><span class="pre">range_max</span></code> and the distance between the
+right most edge and <code class="code docutils literal"><span class="pre">range_max</span></code> is not greater than
+<code class="code docutils literal"><span class="pre">step</span></code> (this is the same behavior as the built-in
+<code class="code docutils literal"><span class="pre">range()</span></code>).  It is not recommended to specify bins in this
+manner.</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>range_min</strong> : float, optional</p>
+<blockquote>
+<div><p>The minimum value that may be included as a bin edge</p>
+</div></blockquote>
+<p><strong>range_max</strong> : float, optional</p>
+<blockquote>
+<div><p>The maximum value that may be included as a bin edge</p>
+</div></blockquote>
+<p><strong>nbins</strong> : int, optional</p>
+<blockquote>
+<div><p>The number of bins, if specified the length of the returned
+value will be nbins + 1</p>
+</div></blockquote>
+<p><strong>step</strong> : float, optional</p>
+<blockquote>
+<div><p>The step between the bins</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>edges</strong> : np.array</p>
+<blockquote class="last">
+<div><p>An array of floats for the bin edges.  The last value is the
+right edge of the last bin.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.bin_edges_to_centers">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">bin_edges_to_centers</code><span class="sig-paren">(</span><em>input_edges</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.bin_edges_to_centers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function for turning a array of bin edges into
+an array of bin centers</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>input_edges</strong> : array-like</p>
+<blockquote>
+<div><p>N + 1 values which are the left edges of N bins
+and the right edge of the last bin</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>centers</strong> : ndarray</p>
+<blockquote class="last">
+<div><p>A length N array giving the centers of the bins</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.bin_grid">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">bin_grid</code><span class="sig-paren">(</span><em>image</em>, <em>r_array</em>, <em>pixel_sizes</em>, <em>statistic='mean'</em>, <em>mask=None</em>, <em>bins=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.bin_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bin and integrate an image, given the radial array of pixels</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>image: np.array</strong></p>
+<blockquote>
+<div><p>The image in quesion</p>
+</div></blockquote>
+<p><strong>r_array: np.array</strong></p>
+<blockquote>
+<div><p>The array which maps pixel positions to tilt/rotation corrected radii</p>
+</div></blockquote>
+<p><strong>pixel_sizes: tuple</strong></p>
+<blockquote>
+<div><p>The size of the pixels in the same units as the r_array</p>
+</div></blockquote>
+<p><strong>statistic: str or func, optional</strong></p>
+<blockquote>
+<div><p>The statistic to compute over the integration, defaults to mean</p>
+</div></blockquote>
+<p><strong>mask: bool array, optional</strong></p>
+<blockquote>
+<div><p>The array of pixels to be removed from the image before integration</p>
+</div></blockquote>
+<p><strong>bins: array, optional</strong></p>
+<blockquote>
+<div><p>The bins to use in the integration, if none given the function will
+give its best assessment based on the pixel_size and r_array</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>bin_centers</strong> : array</p>
+<blockquote>
+<div><p>The center of each bin in R</p>
+</div></blockquote>
+<p><strong>int_stat</strong> : array</p>
+<blockquote class="last">
+<div><p>Radial integrated statistic of the image.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<dl class="last docutils">
+<dt><code class="xref py py-obj docutils literal"><span class="pre">circular_average</span></code></dt>
+<dd>circularly average an image, assuming linear radial spacing (less general)</dd>
+</dl>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.d_to_q">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">d_to_q</code><span class="sig-paren">(</span><em>d</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.d_to_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert <span class="math">\(d\)</span> to <span class="math">\(q\)</span>.
+The point of this function is to prevent fat-fingered typos.</p>
+<p>By definition the relationship is:</p>
+<p>..math</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> \<span class="n">frac</span><span class="p">{</span><span class="mi">2</span> \<span class="n">pi</span><span class="p">}{</span><span class="n">q</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>d</strong> : array</p>
+<blockquote>
+<div><p>An array of d (plane) spacing</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q</strong> : array</p>
+<blockquote class="last">
+<div><p>An array of q values</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.geometric_series">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">geometric_series</code><span class="sig-paren">(</span><em>common_ratio</em>, <em>number_of_images</em>, <em>first_term=1</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.geometric_series" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will provide the geometric series for the integration.
+Last values of the series has to be less than or equal to number
+of images
+ex: number_of_images = 100, first_term =1
+common_ratio = 2, geometric_series =  1, 2, 4, 8, 16, 32, 64
+common_ratio = 3, geometric_series =  1, 3, 9, 27, 81</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>common_ratio</strong> : float</p>
+<blockquote>
+<div><p>common ratio of the series</p>
+</div></blockquote>
+<p><strong>number_of_images</strong> : int</p>
+<blockquote>
+<div><p>number of images</p>
+</div></blockquote>
+<p><strong>first_term</strong> : float, optional</p>
+<blockquote class="last">
+<div><p>first term in the series</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<div class="math">
+\[a + ar + ar^2 + ar^3 + ar^4 + ...\]</div>
+<p>a - first term in the series</p>
+<p>r - is the common ratio</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.grid3d">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">grid3d</code><span class="sig-paren">(</span><em>q</em>, <em>img_stack</em>, <em>nx=None</em>, <em>ny=None</em>, <em>nz=None</em>, <em>xmin=None</em>, <em>xmax=None</em>, <em>ymin=None</em>, <em>ymax=None</em>, <em>zmin=None</em>, <em>zmax=None</em>, <em>binary_mask=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.grid3d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Grid irregularly spaced data points onto a regular grid via histogramming</p>
+<p>This function will process the set of reciprocal space values (q), the
+image stack (img_stack) and grid the image data based on the bounds
+provided, using defaults if none are provided.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>q</strong> : ndarray</p>
+<blockquote>
+<div><p>(Qx, Qy, Qz) - HKL values - Nx3 array</p>
+</div></blockquote>
+<p><strong>img_stack</strong> : ndarray</p>
+<blockquote>
+<div><p>Intensity array of the images
+dimensions are: [num_img][num_rows][num_cols]</p>
+</div></blockquote>
+<p><strong>nx</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of voxels along x</p>
+</div></blockquote>
+<p><strong>ny</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of voxels along y</p>
+</div></blockquote>
+<p><strong>nz</strong> : int, optional</p>
+<blockquote>
+<div><p>Number of voxels along z</p>
+</div></blockquote>
+<p><strong>xmin</strong> : float, optional</p>
+<blockquote>
+<div><p>Minimum value along x. Defaults to smallest x value in q</p>
+</div></blockquote>
+<p><strong>ymin</strong> : float, optional</p>
+<blockquote>
+<div><p>Minimum value along y. Defaults to smallest y value in q</p>
+</div></blockquote>
+<p><strong>zmin</strong> : float, optional</p>
+<blockquote>
+<div><p>Minimum value along z. Defaults to smallest z value in q</p>
+</div></blockquote>
+<p><strong>xmax</strong> : float, optional</p>
+<blockquote>
+<div><p>Maximum value along x. Defaults to largest x value in q</p>
+</div></blockquote>
+<p><strong>ymax</strong> : float, optional</p>
+<blockquote>
+<div><p>Maximum value along y. Defaults to largest y value in q</p>
+</div></blockquote>
+<p><strong>zmax</strong> : float, optional</p>
+<blockquote>
+<div><p>Maximum value along z. Defaults to largest z value in q</p>
+</div></blockquote>
+<p><strong>binary_mask</strong> : ndarray, optional</p>
+<blockquote>
+<div><p>The binary mask provides a mechanism to remove unwanted pixels
+from the images.
+Binary mask can be two different shapes.
+- 1: 2-D with binary_mask.shape == np.asarray(img_stack[0]).shape
+- 2: 3-D with binary_mask.shape == np.asarray(img_stack).shape</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>mean</strong> : ndarray</p>
+<blockquote>
+<div><p>intensity grid.  The values in this grid are the
+mean of the values that fill with in the grid.</p>
+</div></blockquote>
+<p><strong>occupancy</strong> : ndarray</p>
+<blockquote>
+<div><p>The number of data points that fell in the grid.</p>
+</div></blockquote>
+<p><strong>std_err</strong> : ndarray</p>
+<blockquote>
+<div><p>This is the standard error of the value in the
+grid box.</p>
+</div></blockquote>
+<p><strong>bounds</strong> : list</p>
+<blockquote class="last">
+<div><p>tuple of (min, max, step) for x, y, z in order: [x_bounds,
+y_bounds, z_bounds]</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.img_to_relative_xyi">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">img_to_relative_xyi</code><span class="sig-paren">(</span><em>img</em>, <em>cx</em>, <em>cy</em>, <em>pixel_size_x=None</em>, <em>pixel_size_y=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.img_to_relative_xyi" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the 2D image to a list of x y I coordinates where
+x == x_img - detector_center[0] and
+y == y_img - detector_center[1]</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img: `ndarray`</strong></p>
+<blockquote>
+<div><p>2D image</p>
+</div></blockquote>
+<p><strong>cx</strong> : float</p>
+<blockquote>
+<div><p>Image center in the x direction</p>
+</div></blockquote>
+<p><strong>cy</strong> : float</p>
+<blockquote>
+<div><p>Image center in the y direction</p>
+</div></blockquote>
+<p><strong>pixel_size_x</strong> : float, optional</p>
+<blockquote>
+<div><p>Pixel size in x</p>
+</div></blockquote>
+<p><strong>pixel_size_y</strong> : float, optional</p>
+<blockquote>
+<div><p>Pixel size in y</p>
+</div></blockquote>
+<p><strong>**kwargs: dict</strong></p>
+<blockquote>
+<div><p>Bucket for extra parameters in an unpacked dictionary</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>x</strong> : <cite>ndarray</cite></p>
+<blockquote>
+<div><p>x-coordinate of pixel. shape (N, )</p>
+</div></blockquote>
+<p><strong>y</strong> : <cite>ndarray</cite></p>
+<blockquote>
+<div><p>y-coordinate of pixel. shape (N, )</p>
+</div></blockquote>
+<p><strong>I</strong> : <cite>ndarray</cite></p>
+<blockquote class="last">
+<div><p>intensity of pixel. shape (N, )</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="skbeam.core.utils.md_value">
+<em class="property">class </em><code class="descclassname">skbeam.core.utils.</code><code class="descname">md_value</code><span class="sig-paren">(</span><em>value</em>, <em>units</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.md_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#tuple" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">tuple</span></code></a></p>
+<dl class="attribute">
+<dt id="skbeam.core.utils.md_value.units">
+<code class="descname">units</code><a class="headerlink" href="#skbeam.core.utils.md_value.units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 1</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="skbeam.core.utils.md_value.value">
+<code class="descname">value</code><a class="headerlink" href="#skbeam.core.utils.md_value.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for field number 0</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.multi_tau_lags">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">multi_tau_lags</code><span class="sig-paren">(</span><em>multitau_levels</em>, <em>multitau_channels</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.multi_tau_lags" title="Permalink to this definition">¶</a></dt>
+<dd><p>Standard multiple-tau algorithm for finding the lag times (delay
+times).</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>multitau_levels</strong> : int</p>
+<blockquote>
+<div><p>number of levels of multiple-taus</p>
+</div></blockquote>
+<p><strong>multitau_channels</strong> : int</p>
+<blockquote>
+<div><p>number of channels or number of buffers in auto-correlators
+normalizations (must be even)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>total_channels</strong> : int</p>
+<blockquote>
+<div><p>total number of channels ( or total number of delay times)</p>
+</div></blockquote>
+<p><strong>lag_steps</strong> : ndarray</p>
+<blockquote>
+<div><p>delay or lag steps for the multiple tau analysis</p>
+</div></blockquote>
+<p><strong>dict_lags</strong> : dict</p>
+<blockquote class="last">
+<div><p>dictionary of delays for each multitau_levels</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Notes</p>
+<p>The multi-tau correlation scheme was used for finding the lag times
+(delay times).</p>
+<p>References: text <a class="reference internal" href="#r4949" id="id1">[R4949]</a></p>
+<table class="docutils citation" frame="void" id="r4949" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R4949]</a></td><td>K. Schätzela, M. Drewela and  S. Stimaca, “Photon correlation
+measurements at large lag times: Improving statistical accuracy,”
+J. Mod. Opt., vol 35, p 711–718, 1988.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.pairwise">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">pairwise</code><span class="sig-paren">(</span><em>iterable</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.pairwise" title="Permalink to this definition">¶</a></dt>
+<dd><p>s -&gt; (s0,s1), (s1,s2), (s2, s3), …</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.q_to_d">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">q_to_d</code><span class="sig-paren">(</span><em>q</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.q_to_d" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert <span class="math">\(d\)</span> to <span class="math">\(q\)</span>.  The point
+of this function is to prevent fat-fingered typos.</p>
+<p>By definition the relationship is:</p>
+<p>..math</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> \<span class="n">frac</span><span class="p">{</span><span class="mi">2</span> \<span class="n">pi</span><span class="p">}{</span><span class="n">d</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>q</strong> : array</p>
+<blockquote>
+<div><p>An array of q values</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>d</strong> : array</p>
+<blockquote class="last">
+<div><p>An array of d (plane) spacing</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.q_to_twotheta">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">q_to_twotheta</code><span class="sig-paren">(</span><em>q</em>, <em>wavelength</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.q_to_twotheta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert q to two-theta.</p>
+<p>By definition the relationship is:</p>
+<p>..math</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>\<span class="n">sin</span>\<span class="n">left</span><span class="p">(</span>\<span class="n">frac</span><span class="p">{</span><span class="mi">2</span>\<span class="n">theta</span><span class="p">}{</span><span class="mi">2</span><span class="p">}</span>\<span class="n">right</span><span class="p">)</span> <span class="o">=</span> \<span class="n">frac</span><span class="p">{</span>\<span class="k">lambda</span> <span class="n">q</span><span class="p">}{</span><span class="mi">4</span> \<span class="n">pi</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>thus</p>
+<p>..math</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mi">2</span>\<span class="n">theta_n</span> <span class="o">=</span> <span class="mi">2</span> \<span class="n">arcsin</span>\<span class="n">left</span><span class="p">(</span>\<span class="n">frac</span><span class="p">{</span>\<span class="k">lambda</span> <span class="n">q</span><span class="p">}{</span><span class="mi">4</span> \<span class="n">pi</span><span class="p">}</span>\<span class="n">right</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>q</strong> : array</p>
+<blockquote>
+<div><p>An array of <span class="math">\(q\)</span> values</p>
+</div></blockquote>
+<p><strong>wavelength</strong> : float</p>
+<blockquote>
+<div><p>Wavelength of the incoming x-rays</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>two_theta</strong> : array</p>
+<blockquote class="last">
+<div><p>An array of <span class="math">\(2\theta\)</span> values</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.radial_grid">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">radial_grid</code><span class="sig-paren">(</span><em>center</em>, <em>shape</em>, <em>pixel_size=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.radial_grid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert a cartesian grid (x,y) to the radius relative to some center</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>center</strong> : tuple</p>
+<blockquote>
+<div><p>point in image where r=0; may be a float giving subpixel precision.
+Order is (rr, cc).</p>
+</div></blockquote>
+<p><strong>shape</strong> : tuple</p>
+<blockquote>
+<div><p>Image shape which is used to determine the maximum extent of output
+pixel coordinates.
+Order is (rr, cc).</p>
+</div></blockquote>
+<p><strong>pixel_size</strong> : sequence, optional</p>
+<blockquote>
+<div><p>The physical size of the pixels.
+len(pixel_size) should be the same as len(shape)
+defaults to (1,1)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>r</strong> : array</p>
+<blockquote class="last">
+<div><p>The distance of each pixel from <cite>center</cite>
+Shape of the return value is equal to the <cite>shape</cite> input parameter</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.radius_to_twotheta">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">radius_to_twotheta</code><span class="sig-paren">(</span><em>dist_sample</em>, <em>radius</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.radius_to_twotheta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts radius from the calibrated center to scattering angle
+(2:math:<cite>2theta</cite>) with known detector to sample distance.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>dist_sample</strong> : float</p>
+<blockquote>
+<div><p>distance from the sample to the detector (mm)</p>
+</div></blockquote>
+<p><strong>radius</strong> : array</p>
+<blockquote>
+<div><p>The L2 norm of the distance of each pixel from the calibrated center.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>two_theta</strong> : array</p>
+<blockquote class="last">
+<div><p>An array of <span class="math">\(2\theta\)</span> values</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.subtract_reference_images">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">subtract_reference_images</code><span class="sig-paren">(</span><em>imgs</em>, <em>is_reference</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.subtract_reference_images" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function to subtract a series of measured images from
+background/dark current/reference images.  The nearest reference
+image in the reverse temporal direction is subtracted from each
+measured image.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>imgs</strong> : numpy.ndarray</p>
+<blockquote>
+<div><p>Array of 2-D images</p>
+</div></blockquote>
+<p><strong>is_reference</strong> : 1-D boolean array</p>
+<blockquote>
+<div><p>true  : image is reference image
+false : image is measured image</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>img_corr</strong> : numpy.ndarray</p>
+<blockquote>
+<div><p>len(img_corr) == len(img_arr) - len(is_reference_img == true)
+img_corr is the array of measured images minus the reference
+images.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
+<blockquote class="last">
+<div><dl class="docutils">
+<dt>Possible causes:</dt>
+<dd><p class="first last">is_reference contains no true values
+Raised when the first image in the array is not a reference image.</p>
+</dd>
+</dl>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.twotheta_to_q">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">twotheta_to_q</code><span class="sig-paren">(</span><em>two_theta</em>, <em>wavelength</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.twotheta_to_q" title="Permalink to this definition">¶</a></dt>
+<dd><p>Helper function to convert two-theta to q</p>
+<p>By definition the relationship is</p>
+<p>..math</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>\<span class="n">sin</span>\<span class="n">left</span><span class="p">(</span>\<span class="n">frac</span><span class="p">{</span><span class="mi">2</span>\<span class="n">theta</span><span class="p">}{</span><span class="mi">2</span><span class="p">}</span>\<span class="n">right</span><span class="p">)</span> <span class="o">=</span> \<span class="n">frac</span><span class="p">{</span>\<span class="k">lambda</span> <span class="n">q</span><span class="p">}{</span><span class="mi">4</span> \<span class="n">pi</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>thus</p>
+<p>..math</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">q</span> <span class="o">=</span> \<span class="n">frac</span><span class="p">{</span><span class="mi">4</span> \<span class="n">pi</span> \<span class="n">sin</span>\<span class="n">left</span><span class="p">(</span>\<span class="n">frac</span><span class="p">{</span><span class="mi">2</span>\<span class="n">theta</span><span class="p">}{</span><span class="mi">2</span><span class="p">}</span>\<span class="n">right</span><span class="p">)}{</span>\<span class="k">lambda</span><span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>two_theta</strong> : array</p>
+<blockquote>
+<div><p>An array of <span class="math">\(2\theta\)</span> values</p>
+</div></blockquote>
+<p><strong>wavelength</strong> : float</p>
+<blockquote>
+<div><p>Wavelength of the incoming x-rays</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>q</strong> : array</p>
+<blockquote class="last">
+<div><p>An array of <span class="math">\(q\)</span> values</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="skbeam.core.utils.verbosedict">
+<em class="property">class </em><code class="descclassname">skbeam.core.utils.</code><code class="descname">verbosedict</code><a class="headerlink" href="#skbeam.core.utils.verbosedict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3.5/library/stdtypes.html#dict" title="(in Python v3.5)"><code class="xref py py-class docutils literal"><span class="pre">dict</span></code></a></p>
+<p>A sub-class of dict which raises more verbose errors if
+a key is not found.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.utils.wedge_integration">
+<code class="descclassname">skbeam.core.utils.</code><code class="descname">wedge_integration</code><span class="sig-paren">(</span><em>src_data</em>, <em>center</em>, <em>theta_start</em>, <em>delta_theta</em>, <em>r_inner</em>, <em>delta_r</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.utils.wedge_integration" title="Permalink to this definition">¶</a></dt>
+<dd><p>Implementation of caking.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>scr_data</strong> : ndarray</p>
+<blockquote>
+<div><p>The source-data to be integrated</p>
+</div></blockquote>
+<p><strong>center</strong> : ndarray</p>
+<blockquote>
+<div><p>The center of the ring in pixels</p>
+</div></blockquote>
+<p><strong>theta_start</strong> : float</p>
+<blockquote>
+<div><p>The angle of the start of the wedge from the
+image y-axis in degrees</p>
+</div></blockquote>
+<p><strong>delta_theta</strong> : float</p>
+<blockquote>
+<div><p>The angular width of the wedge in degrees.  Positive
+angles go clockwise, negative go counter-clockwise.</p>
+</div></blockquote>
+<p><strong>r_inner</strong> : float</p>
+<blockquote>
+<div><p>The inner radius in pixel units, Must be non-negative</p>
+</div></blockquote>
+<p><strong>delta_r</strong> : float</p>
+<blockquote>
+<div><p>The length of the wedge in the radial direction
+in pixel units. Must be non-negative</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">float</p>
+<blockquote class="last">
+<div><p>The integrated intensity under the wedge</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+  <li><a href="index.html">Core API</a><ul>
+      <li>Previous: <a href="_as_gen/skbeam.core.speckle.normalize_bin_edges.html" title="previous chapter">skbeam.core.speckle.normalize_bin_edges</a></li>
+      <li>Next: <a href="../io/index.html" title="next chapter">IO API</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/core/utils.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/core/utils.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

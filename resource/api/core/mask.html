@@ -1,0 +1,243 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>core.mask Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="diffraction Module" href="../diffraction.html" />
+    <link rel="prev" title="core subpackge" href="../core.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.core.mask">
+<span id="core-mask-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">core.mask</span></code> Module<a class="headerlink" href="#module-skbeam.core.mask" title="Permalink to this headline">¶</a></h1>
+<p>This module is for functions specific to mask or threshold an image
+basically to clean images</p>
+<dl class="function">
+<dt id="skbeam.core.mask.bad_to_nan_gen">
+<code class="descclassname">skbeam.core.mask.</code><code class="descname">bad_to_nan_gen</code><span class="sig-paren">(</span><em>images</em>, <em>bad</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.mask.bad_to_nan_gen" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convert the images marked as “bad” in <cite>bad</cite> by their index in
+images into a np.nan array</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>images</strong> : iterable</p>
+<blockquote>
+<div><p>Iterable of 2-D arrays</p>
+</div></blockquote>
+<p><strong>bad</strong> : list</p>
+<blockquote>
+<div><p>List of integer indices into the <cite>images</cite> parameter that mark those
+images as “bad”.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first"><strong>img</strong> : array</p>
+<blockquote class="last">
+<div><p>if image is bad it will convert to np.nan array otherwise no
+change to the array</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.mask.binned_outlier">
+<code class="descclassname">skbeam.core.mask.</code><code class="descname">binned_outlier</code><span class="sig-paren">(</span><em>img</em>, <em>r</em>, <em>alpha</em>, <em>bins</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.mask.binned_outlier" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates a mask by identifying outlier pixels in bins and masks any
+pixels which have a value greater or less than alpha * std away from the
+mean</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img: 2darray</strong></p>
+<blockquote>
+<div><p>The  image</p>
+</div></blockquote>
+<p><strong>r: 2darray</strong></p>
+<blockquote>
+<div><p>The  array which maps pixels to bins</p>
+</div></blockquote>
+<p><strong>alpha: float or tuple or, 1darray</strong></p>
+<blockquote>
+<div><p>Then number of acceptable standard deviations, if tuple then we use
+a linear distribution of alphas from alpha[0] to alpha[1], if array
+then we just use that as the distribution of alphas</p>
+</div></blockquote>
+<p><strong>bins: list</strong></p>
+<blockquote>
+<div><p>The bin edges</p>
+</div></blockquote>
+<p><strong>mask: 1darray, bool</strong></p>
+<blockquote>
+<div><p>A starting flattened mask</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">2darray:</p>
+<blockquote class="last">
+<div><p>The mask</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.mask.margin">
+<code class="descclassname">skbeam.core.mask.</code><code class="descname">margin</code><span class="sig-paren">(</span><em>img_shape</em>, <em>edge_size</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.mask.margin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mask the edge of an image</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>img_shape: tuple</strong></p>
+<blockquote>
+<div><p>The shape of the image</p>
+</div></blockquote>
+<p><strong>edge_size: int</strong></p>
+<blockquote>
+<div><p>Number of pixels to mask from the edge</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">2darray:</p>
+<blockquote class="last">
+<div><p>The mask array, bad pixels are 0</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.mask.threshold">
+<code class="descclassname">skbeam.core.mask.</code><code class="descname">threshold</code><span class="sig-paren">(</span><em>images</em>, <em>threshold</em>, <em>mask=None</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.mask.threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>This generator sets all pixels whose value is greater than <cite>threshold</cite>
+to 0 and yields the thresholded images out</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>images</strong> : iterable</p>
+<blockquote>
+<div><p>Iterable of 2-D arrays</p>
+</div></blockquote>
+<p><strong>threshold</strong> : float</p>
+<blockquote>
+<div><p>threshold value to remove the hot spots in the image</p>
+</div></blockquote>
+<p><strong>mask</strong> : array</p>
+<blockquote>
+<div><p>array with values above the threshold marked as 0 and values
+below marked as 1.
+shape is (num_columns, num_rows) of the image, optional None</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Yields:</th><td class="field-body"><p class="first"><strong>mask</strong> : array</p>
+<blockquote class="last">
+<div><p>array with values above the threshold marked as 0 and values
+below marked as 1.
+shape is (num_columns, num_rows) of the image</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+      <li>Previous: <a href="../core.html" title="previous chapter"><code class="docutils literal"><span class="pre">core</span></code> subpackge</a></li>
+      <li>Next: <a href="../diffraction.html" title="next chapter"><code class="docutils literal"><span class="pre">diffraction</span></code> Module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/core/mask.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/core/mask.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

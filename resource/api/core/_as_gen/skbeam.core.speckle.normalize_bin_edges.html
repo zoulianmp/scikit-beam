@@ -1,0 +1,152 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>skbeam.core.speckle.normalize_bin_edges &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="core.utils Module" href="../utils.html" />
+    <link rel="prev" title="skbeam.core.speckle.xsvs" href="skbeam.core.speckle.xsvs.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="skbeam-core-speckle-normalize-bin-edges">
+<h1>skbeam.core.speckle.normalize_bin_edges<a class="headerlink" href="#skbeam-core-speckle-normalize-bin-edges" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="skbeam.core.speckle.normalize_bin_edges">
+<code class="descclassname">skbeam.core.speckle.</code><code class="descname">normalize_bin_edges</code><span class="sig-paren">(</span><em>num_times</em>, <em>num_rois</em>, <em>mean_roi</em>, <em>max_cts</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.speckle.normalize_bin_edges" title="Permalink to this definition">¶</a></dt>
+<dd><p>This will provide the normalized bin edges and bin centers for each
+integration time.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>num_times</strong> : int</p>
+<blockquote>
+<div><p>number of integration times for XSVS</p>
+</div></blockquote>
+<p><strong>num_rois</strong> : int</p>
+<blockquote>
+<div><p>number of ROI’s</p>
+</div></blockquote>
+<p><strong>mean_roi</strong> : array</p>
+<blockquote>
+<div><p>mean intensity of each ROI
+shape (number of ROI’s)</p>
+</div></blockquote>
+<p><strong>max_cts</strong> : int</p>
+<blockquote>
+<div><p>maximum pixel counts</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>norm_bin_edges</strong> : array</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>normalized speckle count bin edges</dt>
+<dd><p class="first last">shape (num_times, num_rois)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>norm_bin_centers :array</p>
+<blockquote class="last">
+<div><p>normalized speckle count bin centers
+shape (num_times, num_rois)</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Complete Reference (API)</a><ul>
+  <li><a href="../index.html">Core API</a><ul>
+  <li><a href="../speckle.html">X-ray speckle visibility spectroscopy(XSVS)</a><ul>
+      <li>Previous: <a href="skbeam.core.speckle.xsvs.html" title="previous chapter">skbeam.core.speckle.xsvs</a></li>
+      <li>Next: <a href="../utils.html" title="next chapter"><code class="docutils literal"><span class="pre">core.utils</span></code> Module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.speckle.normalize_bin_edges.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../../_sources/resource/api/core/_as_gen/skbeam.core.speckle.normalize_bin_edges.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

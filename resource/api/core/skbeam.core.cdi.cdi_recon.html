@@ -1,0 +1,217 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>skbeam.core.cdi.cdi_recon &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="skbeam.core.cdi.pi_modulus" href="skbeam.core.cdi.pi_modulus.html" />
+    <link rel="prev" title="cdi" href="cdi.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="skbeam-core-cdi-cdi-recon">
+<h1>skbeam.core.cdi.cdi_recon<a class="headerlink" href="#skbeam-core-cdi-cdi-recon" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="skbeam.core.cdi.cdi_recon">
+<code class="descclassname">skbeam.core.cdi.</code><code class="descname">cdi_recon</code><span class="sig-paren">(</span><em>diffracted_pattern</em>, <em>sample_obj</em>, <em>sup</em>, <em>beta=1.15</em>, <em>start_avg=0.8</em>, <em>pi_modulus_flag='Complex'</em>, <em>sw_flag=True</em>, <em>sw_sigma=0.5</em>, <em>sw_threshold=0.1</em>, <em>sw_start=0.2</em>, <em>sw_end=0.8</em>, <em>sw_step=10</em>, <em>n_iterations=1000</em>, <em>cb_function=None</em>, <em>cb_step=10</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.cdi.cdi_recon" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run reconstruction with difference map algorithm.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>diffracted_pattern</strong> : array</p>
+<blockquote>
+<div><p>diffraction pattern from experiments</p>
+</div></blockquote>
+<p><strong>sample_obj</strong> : array</p>
+<blockquote>
+<div><p>initial sample with phase, complex number</p>
+</div></blockquote>
+<p><strong>sup</strong> : array</p>
+<blockquote>
+<div><p>initial support</p>
+</div></blockquote>
+<p><strong>beta</strong> : float, optional</p>
+<blockquote>
+<div><p>feedback parameter for difference map algorithm.
+default is 1.15.</p>
+</div></blockquote>
+<p><strong>start_avg</strong> : float, optional</p>
+<blockquote>
+<div><p>define the point to start doing average.
+default is 0.8.</p>
+</div></blockquote>
+<p><strong>pi_modulus_flag</strong> : {‘complex’, ‘real’}, optional</p>
+<blockquote>
+<div><p>‘complex’ or ‘real’, defining the way to perform pi_modulus
+calculation.
+default is ‘Complex’.</p>
+</div></blockquote>
+<p><strong>sw_flag</strong> : Bool, optional</p>
+<blockquote>
+<div><p>flag to use shrinkwrap algorithm or not.
+default is True.</p>
+</div></blockquote>
+<p><strong>sw_sigma</strong> : float, optional</p>
+<blockquote>
+<div><p>gaussian width used in sw algorithm.
+default is 0.5.</p>
+</div></blockquote>
+<p><strong>sw_threshold</strong> : float, optional</p>
+<blockquote>
+<div><p>shreshold cut in sw algorithm.
+default is 0.1.</p>
+</div></blockquote>
+<p><strong>sw_start</strong> : float, optional</p>
+<blockquote>
+<div><p>at which point to start to do shrinkwrap.
+defualt is 0.2</p>
+</div></blockquote>
+<p><strong>sw_end</strong> : float, optional</p>
+<blockquote>
+<div><p>at which point to stop shrinkwrap.
+defualt is 0.8</p>
+</div></blockquote>
+<p><strong>sw_step</strong> : float, optional</p>
+<blockquote>
+<div><p>the frequency to perform sw algorithm.
+defualt is 10</p>
+</div></blockquote>
+<p><strong>n_iterations</strong> : int, optional</p>
+<blockquote>
+<div><p>number of iterations to run.
+default is 1000.</p>
+</div></blockquote>
+<p><strong>cb_function</strong> : function, optional</p>
+<blockquote>
+<div><p>This is a callback function that expects to receive these
+four objects: sample_obj, obj_error, diff_error, sup_error.
+Sample_obj is a 2D array. And obj_error, diff_error, and sup_error
+are 1D array.</p>
+</div></blockquote>
+<p><strong>cb_step</strong> : int, optional</p>
+<blockquote>
+<div><p>define plotting frequency, i.e., if plot_step = 10, plot results
+after every 10 iterations.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>obj_avg</strong> : array</p>
+<blockquote>
+<div><p>reconstructed sample object</p>
+</div></blockquote>
+<p><strong>error_dict</strong> : dict</p>
+<blockquote class="last">
+<div><p>Error information for all iterations. The dict keys include
+obj_error, diff_error and sup_error. Obj_error is a list of
+the relative error of sample object. Diff_error is calculated as
+the difference between new diffraction pattern and the original
+diffraction pattern. And sup_error stores the size of the
+sample support.</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r4343" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R4343]</a></td><td>V. Elser, “Phase retrieval by iterated projections”,
+J. Opt. Soc. Am. A, vol. 20, No. 1, 2003</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+  <li><a href="index.html">Core API</a><ul>
+  <li><a href="cdi.html"><code class="docutils literal"><span class="pre">cdi</span></code></a><ul>
+      <li>Previous: <a href="cdi.html" title="previous chapter"><code class="docutils literal"><span class="pre">cdi</span></code></a></li>
+      <li>Next: <a href="skbeam.core.cdi.pi_modulus.html" title="next chapter">skbeam.core.cdi.pi_modulus</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/core/skbeam.core.cdi.cdi_recon.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/core/skbeam.core.cdi.cdi_recon.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

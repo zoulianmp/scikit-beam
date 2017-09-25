@@ -1,0 +1,141 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Core API &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="calibration" href="calibration.html" />
+    <link rel="prev" title="Complete Reference (API)" href="../index.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="core-api">
+<h1>Core API<a class="headerlink" href="#core-api" title="Permalink to this headline">¶</a></h1>
+<p>Contents:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="calibration.html"><code class="docutils literal"><span class="pre">calibration</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="calibration.html#demos">Demos</a></li>
+<li class="toctree-l2"><a class="reference internal" href="calibration.html#module-skbeam.core.calibration">API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="cdi.html"><code class="docutils literal"><span class="pre">cdi</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="cdi.html#api">API</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="constants.html"><code class="docutils literal"><span class="pre">constants</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#elemental-data">Elemental data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="constants.html#module-skbeam.core.constants.xrs">Powder Diffraction Standards</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="correlation.html"><code class="docutils literal"><span class="pre">correlation</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="dpc.html"><code class="docutils literal"><span class="pre">core.dpc</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html"><code class="docutils literal"><span class="pre">core.feature</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fitting/index.html">Fitting API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="fitting/background.html"><code class="docutils literal"><span class="pre">funcs</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitting/funcs.html"><code class="docutils literal"><span class="pre">xrf_model</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitting/lineshapes.html"><code class="docutils literal"><span class="pre">background</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitting/models.html"><code class="docutils literal"><span class="pre">lineshapes</span></code> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitting/xrf_model.html"><code class="docutils literal"><span class="pre">models</span></code> Module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="image.html"><code class="docutils literal"><span class="pre">core.image</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recip.html"><code class="docutils literal"><span class="pre">core.recip</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="roi.html"><code class="docutils literal"><span class="pre">core.roi</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="spectroscopy.html"><code class="docutils literal"><span class="pre">core.spectroscopy</span></code> Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="speckle.html">X-ray speckle visibility spectroscopy(XSVS)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_as_gen/skbeam.core.speckle.xsvs.html">skbeam.core.speckle.xsvs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_as_gen/skbeam.core.speckle.normalize_bin_edges.html">skbeam.core.speckle.normalize_bin_edges</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="utils.html"><code class="docutils literal"><span class="pre">core.utils</span></code> Module</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Complete Reference (API)</a><ul>
+      <li>Previous: <a href="../index.html" title="previous chapter">Complete Reference (API)</a></li>
+      <li>Next: <a href="calibration.html" title="next chapter"><code class="docutils literal"><span class="pre">calibration</span></code></a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../_sources/resource/api/core/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../_sources/resource/api/core/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

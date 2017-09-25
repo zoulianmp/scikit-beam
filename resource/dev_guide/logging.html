@@ -1,0 +1,236 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Logging &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="API Changes" href="../../api_changes.html" />
+    <link rel="prev" title="New Sub-packages and Modules" href="adding_files.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="logging">
+<span id="id1"></span><h1>Logging<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h1>
+<p>Getting feed back from running programs is invaluable for assessing
+the health and performance of the code.  However copious <code class="docutils literal"><span class="pre">print</span></code>
+statements are not practical on projects larger than short scripts.
+This is particularly true for libraries which are imported into user
+code; it is rude to spam the user with debugging output.</p>
+<p>This is such a common need that the tools to solve it are built into
+the core python library in the <a class="reference external" href="https://docs.python.org/3.5/library/logging.html#module-logging" title="(in Python v3.5)"><code class="xref py py-mod docutils literal"><span class="pre">logging</span></code></a> module.</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://github.com/tacaswell/logger_demo">Demonstration</a></li>
+<li><a class="reference external" href="https://docs.python.org/2/howto/logging.html">Basic tutorial</a></li>
+<li><a class="reference external" href="https://docs.python.org/2/library/logging.html">Detailed reference</a></li>
+<li><a class="reference external" href="https://docs.python.org/2/howto/logging-cookbook.html">Cookbook</a></li>
+</ul>
+</div></blockquote>
+<div class="section" id="rough-overview">
+<h2>Rough Overview<a class="headerlink" href="#rough-overview" title="Permalink to this headline">¶</a></h2>
+<p>The logging module provides a frame work for generating and
+propagating messages.  Each process has a hierarchy of <code class="xref py py-class docutils literal"><span class="pre">Logger</span></code>
+objects.  Using the methods on these objects you can generate error
+messages with a severity level attached.  The log messages are then
+formatted (using a <code class="xref py py-class docutils literal"><span class="pre">Formatter</span></code> object) and distributed by
+<code class="xref py py-class docutils literal"><span class="pre">Handler</span></code> objects attached to the <code class="xref py py-class docutils literal"><span class="pre">Logger</span></code>.  The
+messages are also passed up to any parent <code class="xref py py-class docutils literal"><span class="pre">Logger</span></code> s.  Each
+<code class="xref py py-class docutils literal"><span class="pre">Handler</span></code> and <code class="xref py py-class docutils literal"><span class="pre">Logger</span></code> objects have a severity threshold, messages
+below that threshold are ignored.  This enables easy run-time selection of the
+verbosity of the logging.</p>
+<p>There are five default levels of logging, listed in decreasing order of
+severity:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="35%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Level</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Critical</td>
+<td>The program may crash in the near future,
+things have gone very sideways.</td>
+</tr>
+<tr class="row-odd"><td>Error/Exception</td>
+<td>Something has gone badly wrong, an operation
+failed</td>
+</tr>
+<tr class="row-even"><td>Warning</td>
+<td>Something has gone slightly wrong or might go
+wrong in the future</td>
+</tr>
+<tr class="row-odd"><td>Info</td>
+<td>Status, indications everything is working
+correctly.</td>
+</tr>
+<tr class="row-even"><td>Debug</td>
+<td>Messages that are useful for debugging, but
+are too detailed to be generally useful</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="nuts-and-bolts">
+<h2>Nuts and Bolts<a class="headerlink" href="#nuts-and-bolts" title="Permalink to this headline">¶</a></h2>
+<p>The loggers are hierarchical (by dotted name).  If a logger does not have
+a level explicitly set, it will use the level of it’s parent.  Unless prohibited
+loggers will forward all of their accepted messages to their parents.</p>
+<div class="section" id="create-a-message">
+<h3>Create a message<a class="headerlink" href="#create-a-message" title="Permalink to this headline">¶</a></h3>
+<p>A <code class="code docutils literal"><span class="pre">logger</span></code> is defined in each module of our libraries by <code class="code docutils literal"><span class="pre">logger</span> <span class="pre">=</span>
+<span class="pre">logging.getLogger(__name__)</span></code> where <code class="code docutils literal"><span class="pre">__name__</span></code> is the module name.
+Creating messages with the various severity levels is done by</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;this is a debug message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;this is a info message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;this is a warning message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;this is a error message&quot;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">critical</span><span class="p">(</span><span class="s2">&quot;this is a critical message&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>which will yield an error message with the body “this is a [level] message”.</p>
+<p>The error messages also understand basic string formatting so</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;this is a </span><span class="si">%s</span><span class="s2"> debug message no. </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">great</span><span class="p">,</span> <span class="mi">42</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>will yield a message with the body “this is a great debug message no. 42”.</p>
+</div>
+<div class="section" id="attaching-a-handler">
+<h3>Attaching a Handler<a class="headerlink" href="#attaching-a-handler" title="Permalink to this headline">¶</a></h3>
+<p>By default the library does not attach a non-null <code class="xref py py-class docutils literal"><span class="pre">Handler</span></code> to
+any of the <code class="xref py py-class docutils literal"><span class="pre">Logger</span></code> objects (<a class="reference external" href="https://docs.python.org/2/howto/logging.html#configuring-logging-for-a-library">see</a>).
+In order to get the messages out a <code class="xref py py-class docutils literal"><span class="pre">Handler</span></code> (with it’s own
+<code class="xref py py-class docutils literal"><span class="pre">Formatter</span></code>) need to be attached to the logger</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">form</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above code demonstrates the mechanism by which a <cite>StreamHandler</cite> is
+attached to the logger.  <cite>StreamHandler</cite> writes to stderr by default.</p>
+<p><a class="reference external" href="https://docs.python.org/2/howto/logging.html#useful-handlers">Detailed explanations of the available handlers</a>.</p>
+</div>
+<div class="section" id="defining-a-formatter">
+<h3>Defining a Formatter<a class="headerlink" href="#defining-a-formatter" title="Permalink to this headline">¶</a></h3>
+<p>The <code class="xref py py-class docutils literal"><span class="pre">Formatters</span></code> are essentially string formatting.  For a full
+list of the data available and the corresponding variable names, see <a class="reference external" href="https://docs.python.org/2/library/logging.html#logrecord-attributes">this list</a></p>
+<p>For example to show the time, the severity, and the message</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">form</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelname)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or to see the time, the level as a number, the function the logging call was in and
+the message</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">form</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%(asctime)s</span><span class="s1"> - </span><span class="si">%(levelno)s</span><span class="s1"> - </span><span class="si">%(funcName)s</span><span class="s1"> - </span><span class="si">%(message)s</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or to completely dis-regard everything</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">form</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s1">&#39;HI MOM&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Logging</a><ul>
+<li><a class="reference internal" href="#rough-overview">Rough Overview</a></li>
+<li><a class="reference internal" href="#nuts-and-bolts">Nuts and Bolts</a><ul>
+<li><a class="reference internal" href="#create-a-message">Create a message</a></li>
+<li><a class="reference internal" href="#attaching-a-handler">Attaching a Handler</a></li>
+<li><a class="reference internal" href="#defining-a-formatter">Defining a Formatter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Development Guide</a><ul>
+      <li>Previous: <a href="adding_files.html" title="previous chapter">New Sub-packages and Modules</a></li>
+      <li>Next: <a href="../../api_changes.html" title="next chapter">API Changes</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/resource/dev_guide/logging.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/resource/dev_guide/logging.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

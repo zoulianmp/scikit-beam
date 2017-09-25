@@ -1,0 +1,207 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>New Sub-packages and Modules &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Logging" href="logging.html" />
+    <link rel="prev" title="Documentation" href="doc_doc.html" />
+   
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="new-sub-packages-and-modules">
+<span id="adding-files"></span><h1>New Sub-packages and Modules<a class="headerlink" href="#new-sub-packages-and-modules" title="Permalink to this headline">¶</a></h1>
+<p>When adding new packages and modules (which map to folders and files)
+to the library you are required to update both the build/install
+system (<code class="file docutils literal"><span class="pre">setup.py</span></code>) and add files to the documentation folder.</p>
+<p>All python source code must be under the main <code class="file docutils literal"><span class="pre">skbeam</span></code> directory.
+Non-python sources goes in the <code class="file docutils literal"><span class="pre">src</span></code> directory.</p>
+<div class="section" id="build">
+<h2>Build<a class="headerlink" href="#build" title="Permalink to this headline">¶</a></h2>
+<p>For a folder in the source-tree to be a package it must have an
+<code class="file docutils literal"><span class="pre">__init__.py</span></code> file (even if it is empty).  All of the python
+(<code class="file docutils literal"><span class="pre">*.py</span></code>) files in that package are then recognized as modules in
+that package which can be imported in other files (See Relative Imports header).</p>
+<p>In order for <a class="reference external" href="https://docs.python.org/3.5/library/distutils.html#module-distutils" title="(in Python v3.5)"><code class="xref py py-mod docutils literal"><span class="pre">distutils</span></code></a> to work it must be explicitly told what
+packages from the source tree to byte-compile and install.  This is
+done via the <code class="code docutils literal"><span class="pre">packages</span></code> key word argument (kwarg) to <code class="xref py py-func docutils literal"><span class="pre">setup()</span></code> in
+<code class="file docutils literal"><span class="pre">setup.py</span></code>.  If you add a package, then it’s dotted-name must be
+added to this list.</p>
+<p>e.g. if you add a new package called <code class="code docutils literal"><span class="pre">utils</span></code> to the <code class="code docutils literal"><span class="pre">skbeam</span></code> folder,
+the following setup.py file:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;scikit-beam&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s1">&#39;Brookhaven National Lab&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;skbeam&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+
+<span class="n">would</span> <span class="n">need</span> <span class="n">to</span> <span class="n">be</span> <span class="n">modified</span> <span class="n">to</span><span class="p">:</span>
+
+<span class="n">setup</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;scikit-beam&#39;</span><span class="p">,</span>
+    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;0&#39;</span><span class="p">,</span>
+    <span class="n">author</span><span class="o">=</span><span class="s1">&#39;Brookhaven National Lab&#39;</span><span class="p">,</span>
+    <span class="n">packages</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;skbeam&quot;</span><span class="p">,</span> <span class="s2">&quot;skbeam.utils&quot;</span><span class="p">],</span>   <span class="o">&lt;-------</span> <span class="n">modification</span> <span class="n">happened</span> <span class="n">here</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>See <a class="reference internal" href="doc_doc.html#doc-doc"><span class="std std-ref">Documentation</span></a> for documentation about writing and building
+the documentation.</p>
+<p>Continuing the example from above where a ‘utils’ source code package was added,
+a folder called <code class="file docutils literal"><span class="pre">/doc/resource/api/utils</span></code> should be added.  Let’s also
+presume that you’ve got <code class="file docutils literal"><span class="pre">fitting.py</span></code> in the <code class="file docutils literal"><span class="pre">/skbeam/utils/</span></code>.  In the
+documentation <code class="file docutils literal"><span class="pre">/doc/resource/api/utils</span></code> folder, create a file named
+<code class="file docutils literal"><span class="pre">index.rst</span></code> with the contents:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">UTILS</span> <span class="n">API</span>
+<span class="o">=========</span>
+
+<span class="n">Contents</span><span class="p">:</span>
+
+<span class="o">..</span> <span class="n">toctree</span><span class="p">::</span>
+   <span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">2</span>
+
+   <span class="n">fitting</span>
+</pre></div>
+</div>
+<p>Also, add the <code class="file docutils literal"><span class="pre">/doc/resource/api/utils/index.rst</span></code> to
+<code class="file docutils literal"><span class="pre">/doc/resource/api/index.rst</span></code>.  This will tell <code class="docutils literal"><span class="pre">sphinx</span></code> to include
+the new package in the API documentation.</p>
+<p>Now, let’s create a module called <code class="file docutils literal"><span class="pre">fitting.py</span></code> in the <code class="file docutils literal"><span class="pre">utils</span></code>
+package.  When you add <code class="file docutils literal"><span class="pre">fitting.py</span></code> you need to add a corresponding file
+in the documentation folder structure:
+<code class="file docutils literal"><span class="pre">/doc/resource/api/utils/fitting.rst</span></code>.  In <code class="file docutils literal"><span class="pre">fitting.rst</span></code> use the
+following template:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span>======================
+ :mod:`fitting` Module
+======================
+
+Any prose you want to add about the module, such as examples, discussion,
+or saying hi to your mom can go here.
+
+.. automodule:: skbeam.core.fitting
+   :members:
+   :show-inheritance:
+   :undoc-members:
+</pre></div>
+</div>
+<p>This will automatically walk the module to extract and format the doc strings
+of all the classes and functions in the module.</p>
+</div>
+<div class="section" id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h2>
+<p>When you add a new module or package please add the corresponding
+files and folders in the <code class="file docutils literal"><span class="pre">skbeam/tests</span></code> folder.  Packages get
+<code class="file docutils literal"><span class="pre">test_packagename</span></code> and modules get <code class="file docutils literal"><span class="pre">test_module_name.py</span></code>
+in the proper directory.</p>
+<p>Using the example above, you would create the directory
+<code class="file docutils literal"><span class="pre">/skbeam/tests/test_utils/</span></code> and the file <code class="file docutils literal"><span class="pre">test_fitting.py</span></code> in the
+<code class="file docutils literal"><span class="pre">test_utils</span></code> folder.</p>
+<p>Remember: Write a test for all new functionality!!</p>
+</div>
+<div class="section" id="relative-imports">
+<h2>Relative Imports<a class="headerlink" href="#relative-imports" title="Permalink to this headline">¶</a></h2>
+<p>See the issue (#?) in the scikit-beam repo on github.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">New Sub-packages and Modules</a><ul>
+<li><a class="reference internal" href="#build">Build</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#testing">Testing</a></li>
+<li><a class="reference internal" href="#relative-imports">Relative Imports</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Development Guide</a><ul>
+      <li>Previous: <a href="doc_doc.html" title="previous chapter">Documentation</a></li>
+      <li>Next: <a href="logging.html" title="next chapter">Logging</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/resource/dev_guide/adding_files.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../_sources/resource/dev_guide/adding_files.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

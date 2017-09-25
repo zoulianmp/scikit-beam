@@ -1,0 +1,318 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>models Module &#8212; scikit-beam 0.0.12.post8+g7aaf6ce documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../../',
+        VERSION:     '0.0.12.post8+g7aaf6ce',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../../../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="core.image Module" href="../image.html" />
+    <link rel="prev" title="lineshapes Module" href="models.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-skbeam.core.fitting.models">
+<span id="models-module"></span><h1><code class="xref py py-mod docutils literal"><span class="pre">models</span></code> Module<a class="headerlink" href="#module-skbeam.core.fitting.models" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="skbeam.core.fitting.models.ComptonModel">
+<em class="property">class </em><code class="descclassname">skbeam.core.fitting.models.</code><code class="descname">ComptonModel</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.models.ComptonModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">lmfit.model.Model</span></code></p>
+<p>Wrap the compton function for fitting within lmfit framework</p>
+<p>Model compton peak, which is generated as an inelastic peak and always
+stays to the left of elastic peak on the spectrum.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>energy value</p>
+</div></blockquote>
+<p><strong>compton_amplitude</strong> : float</p>
+<blockquote>
+<div><p>area for gaussian peak, gaussian step and gaussian tail functions</p>
+</div></blockquote>
+<p><strong>coherent_sct_energy</strong> : float</p>
+<blockquote>
+<div><p>incident energy</p>
+</div></blockquote>
+<p><strong>fwhm_offset</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>fwhm_fanoprime</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>e_offset</strong> : float</p>
+<blockquote>
+<div><p>offset of energy calibration</p>
+</div></blockquote>
+<p><strong>e_linear</strong> : float</p>
+<blockquote>
+<div><p>linear coefficient in energy calibration</p>
+</div></blockquote>
+<p><strong>e_quadratic</strong> : float</p>
+<blockquote>
+<div><p>quadratic coefficient in energy calibration</p>
+</div></blockquote>
+<p><strong>compton_angle</strong> : float</p>
+<blockquote>
+<div><p>compton angle in degree</p>
+</div></blockquote>
+<p><strong>compton_fwhm_corr</strong> : float</p>
+<blockquote>
+<div><p>correction factor on peak width</p>
+</div></blockquote>
+<p><strong>compton_f_step</strong> : float</p>
+<blockquote>
+<div><p>weight factor of the gaussian step function</p>
+</div></blockquote>
+<p><strong>compton_f_tail</strong> : float</p>
+<blockquote>
+<div><p>weight factor of gaussian tail on lower side</p>
+</div></blockquote>
+<p><strong>compton_gamma</strong> : float</p>
+<blockquote>
+<div><p>normalization factor of gaussian tail on lower side</p>
+</div></blockquote>
+<p><strong>compton_hi_f_tail</strong> : float</p>
+<blockquote>
+<div><p>weight factor of gaussian tail on higher side</p>
+</div></blockquote>
+<p><strong>compton_hi_gamma</strong> : float</p>
+<blockquote>
+<div><p>normalization factor of gaussian tail on higher side</p>
+</div></blockquote>
+<p><strong>epsilon</strong> : float</p>
+<blockquote>
+<div><p>energy to create a hole-electron pair
+for Ge 2.96, for Si 3.61 at 300K
+needs to double check this value</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>counts</strong> : array</p>
+<blockquote class="last">
+<div><p>compton peak</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">References</p>
+<table class="docutils citation" frame="void" id="r3535" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R3535]</a></td><td>M. Van Gysel etc, “Description of Compton peaks in energy-dispersive
+x-ray fluorescence spectra”, X-Ray Spectrometry, vol. 32, pp. 139-147,
+2003.</td></tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="skbeam.core.fitting.models.ElasticModel">
+<em class="property">class </em><code class="descclassname">skbeam.core.fitting.models.</code><code class="descname">ElasticModel</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.models.ElasticModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">lmfit.model.Model</span></code></p>
+<p>Wrap the elastic function for fitting within lmfit framework
+Model of elastic peak in X-Ray fluorescence</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>energy value</p>
+</div></blockquote>
+<p><strong>coherent_sct_amplitude</strong> : float</p>
+<blockquote>
+<div><p>area of elastic peak</p>
+</div></blockquote>
+<p><strong>coherent_sct_energy</strong> : float</p>
+<blockquote>
+<div><p>incident energy</p>
+</div></blockquote>
+<p><strong>fwhm_offset</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>fwhm_fanoprime</strong> : float</p>
+<blockquote>
+<div><p>global fitting parameter for peak width</p>
+</div></blockquote>
+<p><strong>e_offset</strong> : float</p>
+<blockquote>
+<div><p>offset of energy calibration</p>
+</div></blockquote>
+<p><strong>e_linear</strong> : float</p>
+<blockquote>
+<div><p>linear coefficient in energy calibration</p>
+</div></blockquote>
+<p><strong>e_quadratic</strong> : float</p>
+<blockquote>
+<div><p>quadratic coefficient in energy calibration</p>
+</div></blockquote>
+<p><strong>epsilon</strong> : float</p>
+<blockquote>
+<div><p>energy to create a hole-electron pair
+for Ge 2.96, for Si 3.61 at 300K
+needs to double check this value</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>value</strong> : array</p>
+<blockquote class="last">
+<div><p>elastic peak</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="class">
+<dt id="skbeam.core.fitting.models.Lorentzian2Model">
+<em class="property">class </em><code class="descclassname">skbeam.core.fitting.models.</code><code class="descname">Lorentzian2Model</code><span class="sig-paren">(</span><em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.models.Lorentzian2Model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">lmfit.model.Model</span></code></p>
+<p>Wrap the lorentzian2 function for fitting within lmfit framework
+1-d lorentzian squared profile</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>x</strong> : array</p>
+<blockquote>
+<div><p>independent variable</p>
+</div></blockquote>
+<p><strong>area</strong> : float</p>
+<blockquote>
+<div><p>area of lorentzian squared peak,
+If area is set as 1, the integral is unity.</p>
+</div></blockquote>
+<p><strong>center</strong> : float</p>
+<blockquote>
+<div><p>center position</p>
+</div></blockquote>
+<p><strong>sigma</strong> : float</p>
+<blockquote class="last">
+<div><p>standard deviation</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="skbeam.core.fitting.models.set_default">
+<code class="descclassname">skbeam.core.fitting.models.</code><code class="descname">set_default</code><span class="sig-paren">(</span><em>model_name</em>, <em>func_name</em><span class="sig-paren">)</span><a class="headerlink" href="#skbeam.core.fitting.models.set_default" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set values and bounds to Model parameters in lmfit.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>model_name</strong> : class object</p>
+<blockquote>
+<div><p>Model class object from lmfit</p>
+</div></blockquote>
+<p><strong>func_name</strong> : function</p>
+<blockquote class="last">
+<div><p>function name of physics peak</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../index.html">Complete Reference (API)</a><ul>
+  <li><a href="../index.html">Core API</a><ul>
+  <li><a href="index.html">Fitting API</a><ul>
+      <li>Previous: <a href="models.html" title="previous chapter"><code class="docutils literal"><span class="pre">lineshapes</span></code> Module</a></li>
+      <li>Next: <a href="../image.html" title="next chapter"><code class="docutils literal"><span class="pre">core.image</span></code> Module</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/resource/api/core/fitting/xrf_model.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2014-2015 Brookhaven National Lab.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.6.3</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.10</a>
+      
+      |
+      <a href="../../../../_sources/resource/api/core/fitting/xrf_model.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
